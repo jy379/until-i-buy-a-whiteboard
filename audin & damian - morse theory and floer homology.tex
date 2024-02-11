@@ -1,0 +1,104 @@
+\documentclass[hidelinks, 12pt]{article} 
+\usepackage{geometry}   \geometry{letterpaper}  
+\usepackage{color}
+
+\usepackage[parfill]{parskip}   
+\usepackage{graphicx}	
+	
+\addtolength{\oddsidemargin}{-0.8in}
+\addtolength{\evensidemargin}{-0.8in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1in}	
+	
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+
+\DeclareMathOperator{\Crit}{Crit}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\im}{im}
+
+\usepackage{amsthm}
+
+\newtheoremstyle{mydefstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1} \normalfont{(#3)}}}}
+    
+\theoremstyle{mydefstyle}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newtheoremstyle{mythmstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \thmnumber{#2} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1 #2} \normalfont{(#3)}}}}
+    
+\theoremstyle{mythmstyle} 
+\newcounter{prop}
+\newtheorem{proposition}[prop]{Proposition}
+\newtheorem{theorem}[prop]{Theorem}
+\newtheorem{corollary}[prop]{Corollary}
+\newtheorem{lemma}[prop]{Lemma}
+
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+
+
+
+
+
+
+
+
+\title{Morse Theory and Floer Homology}
+\date{}
+
+\begin{document}
+%\maketitle
+\pagecolor{white}
+%\tableofcontents
+
+\textbf{4.4 Euler Characteristic, Poincar{\'e} Polynomial}
+
+The number of critical points modulo 2 of a Morse function depends only on the manifold and not on the function.
+
+More precisely, we have
+\begin{gather*}
+\#\Crit(f) \ge \sum_{k = 0}^n \left( \dim \ker \partial_k - \dim \im \partial_{k+1} \right) = \sum_{k = 0}^n \dim HM_k(V; \mathbb{Z}/2)
+\end{gather*}
+
+If we define $c_k(f)$ to be the number of critical points of index $k$ of the Morse function $f$ and let $\beta_k = \dim HM_k(V; \mathbb{Z}/2)$ (the $k$th Betti number of $V$), then the proposition can be written as
+\begin{gather*}
+c_k(f) \ge \beta_k, \qquad k \ge 0
+\end{gather*}
+a series of inequalities known as the Morse inequalities. 
+
+\textbf{6.1 The Arnold Conjecture}
+
+Let $W$ be a compact symplectic manifold and let
+\begin{gather*}
+H : W \times \mathbb{R} \to \mathbb{R}
+\end{gather*}
+be a time-dependent Hamiltonian. Suppose that the solutions of period 1 of the associated Hamiltonian system are nondegenerate. Then their number is greater than or equal to the sum
+\begin{gather*}
+\sum_i \dim HM_i(W; \mathbb{Z}/2)
+\end{gather*}
+
+\end{document}
