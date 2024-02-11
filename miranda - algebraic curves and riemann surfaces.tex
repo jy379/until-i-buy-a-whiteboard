@@ -1,0 +1,113 @@
+\documentclass[hidelinks, 12pt]{article} 
+\usepackage{geometry}   \geometry{letterpaper}  
+\usepackage{color}
+
+\usepackage[parfill]{parskip}   
+\usepackage{graphicx}	
+	
+\addtolength{\oddsidemargin}{-0.8in}
+\addtolength{\evensidemargin}{-0.8in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1in}	
+	
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\mult}{mult}
+\DeclareMathOperator{\ord}{ord}
+
+\usepackage{amsthm}
+
+\newtheoremstyle{mydefstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1} \normalfont{(#3)}}}}
+    
+\theoremstyle{mydefstyle}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newtheoremstyle{mythmstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \thmnumber{#2} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1 #2} \normalfont{(#3)}}}}
+    
+\theoremstyle{mythmstyle} 
+\newcounter{prop}
+\newtheorem{proposition}[prop]{Proposition}
+\newtheorem{theorem}[prop]{Theorem}
+\newtheorem{corollary}[prop]{Corollary}
+\newtheorem{lemma}[prop]{Lemma}
+
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+
+
+
+
+
+
+
+
+\title{Algebraic Curves and Riemann Surfaces}
+\date{}
+
+\begin{document}
+%\maketitle
+\pagecolor{white}
+%\tableofcontents
+
+\textbf{I.1 Complex Charts and Complex Structures}
+
+Recall the classification of compact orientable 2-manifolds; each of these is a $g$-holed torus for some unique integer $g \ge 0$. This integer $g$ is called the topological genus of the compact Riemann surface.
+
+\textbf{II.1 Functions on Riemann Surfaces}
+
+Let $f$ be meromorphic at $p$, whose Laurent series in a local coordinate $z$ is $\sum_n c_n(z-z_0)^n$. The order of $f$ at $p$, denoted by $\ord_p(f)$, is the minimum exponent actually appearing (with nonzero coefficient in the Laurent series:
+\begin{gather*}
+\ord_p(f) = \min\{n \vert c_n \ne 0 \}
+\end{gather*}
+
+\textbf{II.4 Global Properties of Holomorphic Maps}
+
+Let $F : X \to Y$ be a nonconstant holomorphic map between compact Riemann surfaces. 
+
+The multiplicity of $F$ at $p$, denoted $\mult_p(F)$, is the unique integer $m$ such that there are local coordinates near $p$ and $F(p)$ with $F$ having the form $z \mapsto z^m$.
+
+\textbf{Proposition} For each $y \in Y$, define $d_y(F)$ to be the sum of the multiplicities of $F$ at the points of $X$ mapping to $y$:
+\begin{gather*}
+d_y(F) = \sum_{p \in F^{-1}(y)} \mult_p(F)
+\end{gather*}
+Then $d_y(F)$ is constant, independent of $y$.
+
+The degree of $F$, denoted $\deg(F)$, is the integer $d_y(F)$ for any $y \in Y$.
+
+\textbf{Theorem} (Hurwitz's formula)
+\begin{gather*}
+2g(X) - 2 = \deg(F)(2g(Y) - 2) + \sum_{p \in X} (\mult_p(F) - 1)
+\end{gather*}
+
+\textbf{Problem} Let $X$ be the projective plane curve of degree $d$ defined by the homogeneous polynomial $F(x, y, z) = x^d + y^d + z^d$. This curve is called the Fermat curve of degree $d$. Let $\pi : X \to \mathbb{P}^1$ be given by $\pi[x:y:z] = [x:y]$. Use Hurwitz's formula to show that the genus of the Fermat curve is
+\begin{gather*}
+g(X) = \frac{(d-1)(d-2)}{2}
+\end{gather*}
+
+\end{document}
