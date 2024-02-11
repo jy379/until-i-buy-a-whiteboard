@@ -1,2 +1,16 @@
 # until-i-buy-a-whiteboard
 to keep track of maths readings until i buy a whiteboard
+
+10th February 2024, Saturday
+
+Created this folder and GitHub repository to keep track of my math readings, until I manage to buy a whiteboard for this purpose (which I should have done 3 years ago). This is also to practice using git/GitHub as Bingyan requested for our statistics datathon. 
+
+Things are pretty depressing right now. Did not understand any of the diagrams James was drawing during our meeting on Thursday (8th February). Hence no proper and substantial meeting notes for this week except this entry (also did not meet Nathan this week). There are several things I could read - Fourier-Mukai transform which is the algebraic geometry side of the A-infinity functor of Wehrheim and Woodward I was reading about the past week; some of Fukaya's original papers or similar articles to understand the Fukaya category better; some of Floer's original papers or similar to understand Floer homology better (bridging the gap between Audin & Damian and Fukaya's solution to the Arnold conjecture); of course I have not fully understood the details of Audin & Damian, in particular the bubbling issue and the Novikov ring (and also the "more precise polynomial version" of the Arnold conjecture as mentioned e.g. in Bott's "Morse Theory Indomitable", I am not sure if this is related to the Novikov ring). But I think the right thing to prioritise is chapter 2 (and maybe subsequent chapters) in D-Branes and Mirror Symmetry to see how more complicated (e.g. conformal) field theories are cooked up, rather than just the hazy picture of topological quantum field theory that I have had in my head since 2 weeks ago. 
+
+I cannot help it but feel inclined to shore up my foundations. Though it is clearly not what I should be doing right now. I am also conflicted about the resolution to minimise typing in favour of really reading and absorbing the ideas. Some organisation seems necessary though. Will have to continue trying to find the best way forward. 
+
+A small realisation about the algebra - I should not waste time on it. It is terrible to be tempted to dig deeply into representation theory, Lie groups and Lie algebras, cohomology of groups, associative algebras, Lie algebras, commutative algebra, Galois theory etc But it is quite clear to me now that that is just going to be an endless black hole. If I am comfortable taking the theorems of analysis at face value (or repeatedly browsing books to understand isolated theorems) then I should be able to do the same for algebra. Anyways the Algebra I book from the Russian "Encyclopaedia of Mathematical Sciences" is great and I should make that my first reference whenever I should feel tempted to drown myself in algebra. 
+
+In terms of foundations, the priority should be on Morse Theory and Floer homology, Shafarevich (leading to Hartshorne and then Griffiths and Harris), and Miranda. Could do some Milnor characteristic classes too but I have not got that started in the folder. 
+
+These are my resolutions, written in the final minutes of the first day of the Chinese new year. 
