@@ -1,0 +1,78 @@
+\documentclass[hidelinks, 12pt]{article} 
+\usepackage{geometry}   \geometry{letterpaper}  
+\usepackage{color}
+
+\usepackage[parfill]{parskip}   
+\usepackage{graphicx}	
+	
+\addtolength{\oddsidemargin}{-0.8in}
+\addtolength{\evensidemargin}{-0.8in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1in}	
+	
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+
+\DeclareMathOperator{\Id}{Id}
+
+\usepackage{amsthm}
+
+\newtheoremstyle{mydefstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1} \normalfont{(#3)}}}}
+    
+\theoremstyle{mydefstyle}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newtheoremstyle{mythmstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \thmnumber{#2} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1 #2} \normalfont{(#3)}}}}
+    
+\theoremstyle{mythmstyle} 
+\newcounter{prop}
+\newtheorem{proposition}[prop]{Proposition}
+\newtheorem{theorem}[prop]{Theorem}
+\newtheorem{corollary}[prop]{Corollary}
+\newtheorem{lemma}[prop]{Lemma}
+
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+
+
+
+
+
+
+
+
+\title{Notes on Geometry}
+\date{}
+
+\begin{document}
+%\maketitle
+\pagecolor{white}
+%\tableofcontents
+
+
+
+\end{document}
