@@ -1,0 +1,119 @@
+\documentclass[hidelinks, 12pt]{article} 
+\usepackage{geometry}   \geometry{letterpaper}  
+\usepackage{color}
+
+\usepackage[parfill]{parskip}   
+\usepackage{graphicx}	
+	
+\addtolength{\oddsidemargin}{-0.8in}
+\addtolength{\evensidemargin}{-0.8in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1in}	
+	
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Proj}{Proj}
+
+\usepackage{amsthm}
+
+\newtheoremstyle{mydefstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1} \normalfont{(#3)}}}}
+    
+\theoremstyle{mydefstyle}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newtheoremstyle{mythmstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \thmnumber{#2} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1 #2} \normalfont{(#3)}}}}
+    
+\theoremstyle{mythmstyle} 
+\newcounter{prop}
+\newtheorem{proposition}[prop]{Proposition}
+\newtheorem{theorem}[prop]{Theorem}
+\newtheorem{corollary}[prop]{Corollary}
+\newtheorem{lemma}[prop]{Lemma}
+
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+
+
+
+
+
+
+
+
+\title{Algebraic Geometry}
+\date{}
+
+\begin{document}
+%\maketitle
+\pagecolor{white}
+%\tableofcontents
+
+\textbf{Problem III.4.7} Let $X$ be a subscheme of $\mathbb{P}^2_k$ defined by a single homogeneous equation $f(x_0, x_1, x_2) = 0$ of degree $d$. (Do not assume $f$ is irreducible.) Assume that $(1, 0, 0)$ is not on $X$. Then show that $X$ can be covered by the two open affine subsets $U = X \cap \{x_1 \ne 0\}$ and $V = X \cap \{x_2 \ne 0\}$. Now calculate the Cech complex
+\begin{gather*}
+\Gamma(U, \mathcal{O}_X) \oplus \Gamma(V, \mathcal{O}_X) \to \Gamma(U \cap V, \mathcal{O}_X)
+\end{gather*}
+explicitly, and thus show that
+\begin{gather*}
+\dim H^0(X, \mathcal{O}_X) = 1, \qquad \dim H^1(X, \mathcal{O}_X) = \frac{(d-1)(d-2)}{2}
+\end{gather*}
+
+\textbf{III.5 The Cohomology of Projective Space}
+
+\textbf{Theorem 5.1}  Let $A$ be a noetherian ring, let $S = A[x_0, \dots, x_r]$, and let $X = \Proj S$ be the projective space $\mathbb{P}^r_A$ over $A$. Let $\mathcal{O}_X(1)$ be the twisting sheaf of Serre (II, \S 5). For any sheaf of $\mathcal{O}_X$-modules $\mathcal{F}$, we denote by $\Gamma_*(\mathcal{F})$ the graded $S$-module $\oplus_{n\in\mathbb{Z}}\Gamma(X, \mathcal{F}(n))$ (see II, \S 5). Then
+\begin{enumerate}[(\alph*)]
+\item the natural map $S \to \Gamma_*(\mathcal{O}_X) = \oplus_{n\in\mathbb{Z}}H^0(X, \mathcal{O}_X(n))$ is an isomorphism of graded $S$-modules
+\item $H^i(X, \mathcal{O}_X(n)) = 0$ for $0 < i < r$ and all $n \in \mathbb{Z}$
+\item $H^r(X, \mathcal{O}_X(-r-1)) \simeq A$
+\item the natural map
+\begin{gather*}
+H^0(X, \mathcal{O}_X(n)) \times H^r(X, \mathcal{O}_X(-n-r-1)) \to H^r(X, \mathcal{O}_X(-r-1)) \simeq A
+\end{gather*}
+is a perfect pairing of finitely generated free $A$-modules, for each $n \in \mathbb{Z}$.
+\end{enumerate}
+
+\textbf{Problem III.5.3} Let $X$ be a projective scheme of dimension $r$ over a field $k$. We define the arithmetic genus $p_a$ of $X$ by
+\begin{gather*}
+p_a(X) = (-1)^r(\chi(\mathcal{O}_X)-1)
+\end{gather*}
+Note that it depends only on $X$, not on any projective embedding. 
+\begin{enumerate}[(\alph*)]
+\item If $X$ is integral, and $k$ algebraically closed, show that $H^0(X, \mathcal{O}_X) \simeq k$, so that
+\begin{gather*}
+p_a(X) = \sum_{i=0}^{r-1} (-1)^i \dim_k H^{r-i}(X, \mathcal{O}_X)
+\end{gather*}
+In particular, if $X$ is a curve, we have
+\begin{gather*}
+p_a(X) = \dim_k H^1(X, \mathcal{O}_X)
+\end{gather*}
+Hint: Use (I, 3.4)
+\item If $X$ is a closed subvariety of $\mathbb{P}^r_k$, show that this $p_a(X)$ coincides with the one defined in (I, Ex. 7.2), which apparently depended on the projective embedding. 
+\item If $X$ is a nonsingular projective curve over an algebraically closed field $k$, show that $p_a(X)$ is in fact a birational invariant. Conclude that a nonsingular plane curve of degree $d \ge 3$ is not rational. 
+\end{enumerate}
+
+\end{document}
