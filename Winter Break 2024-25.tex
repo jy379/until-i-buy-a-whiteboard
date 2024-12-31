@@ -15,7 +15,9 @@
 \usepackage{amsmath}
 \usepackage{commath}
 
+\DeclareMathOperator{\codim}{codim}
 \DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Ind}{Ind}
 
 \usepackage{amsthm}
 
@@ -295,5 +297,96 @@ The coordinate ring of $Y$ is $k[x, y]/(xy-1)$ but the coordinate ring of $\math
 As argued above, any morphism $\mathbb{A}^1 \to Y$ induces a pullback of the coordinate functions $x$ and $y$ on $Y$, sending them to polynomial functions $p(z)$ and $q(z)$ on $X$, which must satisfy $p(z)q(z) = 1$, which is only possible if $x$ and $y$ are constants. So the only morphism $\mathbb{A}^1 \to Y$ is the constant map.
 
 Regarding morphisms $Y \to \mathbb{A}^1$, there are the two obvious projections onto the coordinate axes $(x, y) \mapsto x$ and $(x, y) \mapsto y$. More generally, we can project onto any straight line through the origin, $(x, y) \mapsto ax + by$ for some constants $a, b \in k$, and then compose with any morphism $\mathbb{A}^1 \to \mathbb{A}^1$, which is simply a polynomial function in one variable, to obtain $(x, y) \mapsto p(ax + by)$ for any $p(z) \in k[z]$. 
+
+\newpage
+
+\textbf{Day 2, 29th December 2024, Sunday}
+
+\textbf{2.1.c Existence of Pseudo-Gradient Fields}
+
+Pseudo-gradient fields exist for all Morse functions on manifolds. This is, for example, a consequence of the existence of Riemannian metrics, and more exactly, of the existence of Riemannian metrics with a prescribed form on a given subset of the manifold. In any case, it is a simple consequence of the existence of partitions of unity. 
+
+\textbf{Proposition 2.1.5} The stable and unstable manifolds of the critical point $a$ are submanifolds of $V$ that are diffeomorphic to open disks. Moreover, we have
+\begin{gather*}
+\dim W^u(a) = \codim W^s(a) = \Ind(a)
+\end{gather*}
+
+\textbf{Proposition 2.1.6} We suppose that the manifold $V$ is compact. Let $\gamma : \mathbb{R} \to V$ be a trajectory of the pseudo-gradient field $X$. Then there exist critical points $c$ and $d$ of $f$ such that
+\begin{gather*}
+\lim_{s\to-\infty} \gamma(s) = c \quad\mbox{ and }\quad \lim_{s\to+\infty} \gamma(s) = d
+\end{gather*}
+
+\textbf{Theorem 2.2.5 (Smale Theorem)} Let $V$ be a manifold with boundary and let $f$ be a Morse function on $V$ with distinct critical values. We fix Morse charts in the neighbourhood of each critical point of $f$. Let $\Omega$ be the union of these charts and let $X$ be a pseudo-gradient field on $V$ that is transversal to the boundary. Then there exists a pseudo-gradient field $X'$ that is close to $X$ (in the $\mathcal{C}^1$ sense), equals $X$ on $\Omega$ and for which we have
+\begin{gather*}
+W^s_{X'}(a) \pitchfork W^u_{X'}(b)
+\end{gather*}
+for all critical points $a, b$ of $f$.
+
+\textbf{Theorem 3.2.2} The space $\overline{\mathcal{L}}(a, b)$ is compact. 
+
+\textbf{Theorem 3.2.7} If $\Ind(a) = \Ind(b) + 2$ then $\overline{\mathcal{L}}(a, b)$ is a compact manifold of dimension 1 with boundary. 
+
+\textbf{Proposition 3.2.8} Let $V$ be a compact manifold, let $f : V \to \mathbb{R}$ be a Morse function ad let $X$ be a pseudo-gradient for $f$ satisfying the Smale property. Let $a, c$ and $b$ be three critical points of indices $k+1$, $k$ and $k-1$ respectively. Let $\lambda_1 \in \mathcal{L}(a, c)$ and $\lambda_2 \in \mathcal{L}(c, b)$. There exists a continuous embedding $\psi$ from an interval $[0, \delta)$ onto a neighbourhood of $(\lambda_1, \lambda_2)$ in $\overline{\mathcal{L}}(a, b)$ that is differentiable on $(0, \delta)$ and satisfies
+\begin{gather*}
+\psi(0) = (\lambda_1, \lambda_2) \in \overline{\mathcal{L}}(a, b), \qquad \psi(s) \in \mathcal{L}(a, b) \quad\mbox{ for }\quad s \ne 0
+\end{gather*}
+Moreover, if $(l_n)$ is a sequence in $\mathcal{L}(a, b)$ that tends to $(\lambda_1, \lambda_2)$, then $l_n$ is contained in the image of $\psi$ for $n$ sufficiently large. 
+
+\textbf{Lemma} Let $k$ b an arbitrary field, $f \in k[x, y]$ an irreducible polynomial, and $g \in k[x, y]$ an arbitrary polynomial. If $g$ is not divisible by $f$ then the system of equations $f(x, y) = g(x, y) = 0$ has only a finite number of solutions. 
+
+\textbf{Day 3, 30th December 2024, Monday}
+
+\textbf{2.3 $L^2$ bounded martingales}
+
+\textbf{Definition} Let
+\begin{gather*}
+M^2 = \{ X : \Omega \times [0, \infty) \to \mathbb{R} : \mbox{ $X$ is a cadlag martingale with $\sup_{t\ge 0} \mathbb{E}X_t^2 < \infty$} \} / \sim \\
+M^2_c = \{ X \in M^2 : X(\omega, \cdot) \mbox{ is continuous for every $\omega \in \Omega$} \} / \sim
+\end{gather*}
+where $\sim$ means that indistinguishable processes are identified. Moreover, set
+\begin{gather*}
+\norm{X}_{M^2} = \left( \sup_t \mathbb{E}X_t^2 \right)^{1/2} = \left( \mathbb{E} X_{\infty}^2 \right)^{1/2}
+\end{gather*}
+
+\textbf{Proposition} $M^2$ is a Hilbert space and $M^2_c$ is a closed subspace.
+
+\textbf{2.4 Quadratic variation}
+
+\textbf{Definition} For a sequence of processes $(X^n)$ and a process $X$, we say $X^n \to X$ ucp (uniformly on compact sets in probability) if for all $t > 0$ and $\epsilon > 0$, 
+\begin{gather*}
+\mathbb{P}(\sup_{s \in [0, t]} \abs{X^n_s - X_s} > \epsilon) \to 0
+\end{gather*}
+as $n \to \infty$.
+
+\newpage
+
+\textbf{Day 4, 31st December 2024, Tuesday}
+
+It is 11.30pm on 31st December 2024, Tuesday. The last day of 2024. The new year is approaching and I feel mostly fear for what the future brings. Fear and stress. The past year seems to have gone by quickly and unproductively. I have accomplished little in the past 4 to 5 years but somehow it feels as if I accomplished the least in the past year. Somehow it feels I will accomplish even less in the coming year, perhaps even degenerate and regress.
+
+I have found it hard to focus in the past few days since coming back to Singapore. Many reasons for my depression and unproductivity have occurred to me. The first reason that came to mind was loneliness. Christmas day was one of the most depressing days in recent memory, almost on par with that worst day of the fall 2024 semester. I spent it alone, aimlessly wandering from the Starbucks at Clarke Quay Central to the tables at Guoco tower at Tanjong Pagar, to the Starbucks at Marina Bay Link Mall. Revisiting all the usual old places. These places used to bring joy to me but now they only bring sadness. I saw so many old lonely people eating alone, sitting alone, aimlessly. It feels as though I am destined to become one of them, or perhaps I am already one of them. Lonely and poor with no purpose in life. 
+
+But it is also perhaps that I have come back to Singaproe too often in the past year. I was only back here in July-August earlier this year, barely 4 months ago. I have accomplished nothing =in the meantime while I was away. It feels as if the city has moved on and left me behind. My peers from Raffles and Cambridge certainly have. I am once again studying at the library. It used to be such a joyful nostalgic thing, learning. But now it seems I am destined, doomed to do this for the rest of my life. Aimlessly, hopelessly studying into oblivion with nothing to show for it. Poor and lonely. Unaccomplished. 
+
+Studying math used to bring solace. It was pure, clean, escapism into a beautiful world where I could be myself. But not anymore. I find myself reading the same things again that I was reading 4 months ago, 1 year ago, 2 years ago. It feels like I am going in circles, or perhaps marching on the spot. Going nowhere. And I do have somewhere I need to be, somewhere I want to be. Somewhere else. There here and now do not spark joy. I long for a better life, a better place. But is that even possible at all now. It all feels so hopelessly impossibly out of reach. I am destined to fail. Forever.                             
+
+Or perhaps it is just the same greed and lack of focus that has always plagued me. I think I have reached my limit. I am being torn apart. My answer to not knowing what I really want to do, all these years, has been to (try to) do everything. It is exhausting. I am exhausted.
+
+It is the new year tomorrow. 1st of January. Just 15 minutes away now. The library won't be open. Sadly? Or perhaps thankfully. I think I will go cycling. I hope the weather will be good. I just want to run away from all of it. But where can I run to? I am stuck. Hopelessly stuck. And alone.
+
+$(X_n)_{n \ge 0}$ is $Markov(\lambda, P)$ if and only if for all $n \ge 0$ and $i_0, \dots, i_n \in I$,
+\begin{gather*}
+P(X_0 = i_0, \dots, X_n = i_n) = \lambda_{i_0} p_{i_0 i_1} \dots p_{i_{n-1} i_n}
+\end{gather*}
+
+Let $\mathcal{A}$ be a $\pi$-system. Then any $d$-system containing $\mathcal{A}$ contains also the $\sigma$-algebra generated by $\mathcal{A}$. 
+
+Let $X$ be an integrable random variable and let $\mathcal{G} \subseteq \mathcal{F}$ be a $\sigma$-algebra. Then there exists a random variable $Y$ such that
+\begin{enumerate}[label=(\alph*)]
+\item $Y$ is $\mathcal{G}$-measurable
+\item $Y$ is integrable and $\mathbb{E}(X1_A) = \mathbb{E}(Y1_A)$ for all $A \in \mathcal{G}$. 
+\end{enumerate}
+
+Let $X$ be a continuous local martingale with $X_0 = 0$. If $X$ is also a finite variation process then $X_t = 0$ $\forall t$ a.s.
 
 \end{document}
