@@ -395,4 +395,97 @@ Let $X$ be a continuous local martingale with $X_0 = 0$. If $X$ is also a finite
 
 Today was better. Went cycling.
 
+\textbf{2nd January 2025, Thursday}
+
+\textbf{ALTAM Chapter 2 Survival Models}
+
+\textbf{2.1 Summary} \\
+\textbf{2.2 The future lifetime random variable} \\
+\textbf{2.3 The force of mortality} \\
+\textbf{2.4 Actuarial notation} \\
+\textbf{2.5 Mean and standard deviation of $T_x$} \\
+\textbf{2.6 Curtate future lifetime}
+
+\textbf{15 regular exercises, 3 excel based exercises}
+
+Let $(x)$ denote a life aged $x$, where $x \ge 0$. The death of $(x)$ can occur at any age greater than $x$, and we model the future lifetime of $(x)$ by a continuous random variable which we denote by $T_x$. This means that $x + T_x$ represents the age-at-death random variable for $(x)$. We write
+\begin{gather*}
+F_x(t) = \mathbb{P}(T_x \le t)
+\end{gather*}
+for the lifetime distribution from age $x$. The survival function
+\begin{gather*}
+S_x(t) = 1 - F_x(t) = \mathbb{P}(T_x > t)
+\end{gather*}
+is the probability that $(x)$ survives for at least $t$ years. 
+
+The fundamental assumption: the events $\{T_x \le t\}$ and $\{T_0 \le x + t\}$ are equivalent in the sense that
+\begin{gather*}
+\mathbb{P}(T_x \le t) = \mathbb{P}(T_0 \le x + t \vert T_0 > x)
+\end{gather*}
+i.e. given that a newborn individual survives to age $x$, the probability that they die by age $x+t$ is the same as the probability that an individual currently aged $x$ dies within $t$ years. Equivalently,
+\begin{gather*}
+F_x(t) 
+= \mathbb{P}(T_x \le t) 
+= \mathbb{P}(T_0 \le x + t \vert T_0 > x) 
+= \frac{\mathbb{P}(x < T_0 \le x + t)}{\mathbb{P})T_0 > x)}
+= \frac{F_0(x+t) - F_0(x)}{1 - F_0(x)}
+\end{gather*}
+\begin{gather*}
+S_x(t) = 1 - F_x(t) = \frac{1 - F_0(x+t)}{1 - F_0(x)} = \frac{S_0(x+t)}{S_0(x)}
+\end{gather*}
+\begin{gather*}
+S_0(x+t) = S_0(x) S_x(t)
+\end{gather*}
+i.e. the probability of a newborn surviving to age $x+t$ is the probability that they survive to $x$ and the probability that a person aged $x$ survives another $t$ years. The events of a newborn surviving two disjoint contiguous time periods are independent. More generally,
+\begin{gather*}
+S_0(x+t+u) = S_0(x+t) S_{x+t}(u) = S_0(x) S_x(t+u) \quad\Rightarrow\quad S_x(t+u) = \frac{S_0(x+t)}{S_0(x)}S_{x+t}(u) = S_x(t) S_{x+t}(u)
+\end{gather*}
+The events of a life of any age surviving two disjoint contiguous time periods are independent.
+
+We denote the force of mortality at age $x$ by $\mu_x$ and define it as
+\begin{align*}
+\mu_x 
+&= \lim_{dx \to 0^+} \frac{\mathbb{P}(T_x \le x + dx \vert T_0 > x)}{dx} \\
+&= \lim_{dx \to 0^+} \frac{\mathbb{P}(T_x \le dx)}{dx} \\
+&= \lim_{dx \to 0^+} \frac{\mathbb{P}(T_x \le dx) - \mathbb{P}(T_x \le 0)}{dx} \\
+&= \lim_{dx \to 0^+} \frac{F_x(dx) - F_x(0)}{dx} \\
+&= - \lim_{dx \to 0^+} \frac{S_x(dx) - S_x(0)}{dx} \\
+&= - \lim_{dx \to 0^+} \frac{S_x(dx) - 1}{dx} \\
+&= - \frac{1}{S_0(x)} \lim_{dx \to 0^+} \frac{S_0(x+dx) - S_0(x)}{dx} = -\frac{1}{S_0(x)} S_0'(x)
+\end{align*}
+or equivalently since $S_0(0) = 1$, 
+\begin{gather*}
+S_0(x) = e^{-\int_0^x \mu_y dy}, \qquad x \ge 0
+\end{gather*}
+More generally,
+\begin{gather*}
+S_x(t) = \frac{S_0(x+t)}{S_0(x)} = e^{-\int_x^{x+t} \mu_y dy}
+\end{gather*}
+In any case, the survival function $S_x(t)$ is kind of exponentially decreasing over time and the force of mortality $\mu_x$ contains all of the information about the rate at which people die off at any age so the fraction of people at age $x$ surviving for at least $t$ years is (one over) the proportion beating the (exponential of) the total force of mortality over those years. 
+
+Two of the most useful mortality laws are Gompertz's law
+\begin{gather*}
+\mu_x = Bc^x \quad\mbox{ for some constants }\quad B > 0 \quad\mbox{ and }\quad c > 1
+\end{gather*}
+and Makeham's law, which is a generalisation of Gompertz's law, given by
+\begin{gather*}
+\mu_x = A + Bc^x \quad\mbox{ for some constants }\quad A, B > 0 \quad\mbox{ and }\quad c > 1
+\end{gather*}
+
+One of the earliest mortality laws proposed was De Moivre's law
+\begin{gather*}
+\mu_x = \frac{1}{\omega - x}, \qquad 0 \le x < \omega
+\end{gather*}
+This is unrealistic since it implies that $T_x$ is uniformly distributed on the interval $(0, \omega - x)$, which means that he probability that a life currently aged $x$ dies between ages $x+t$ and $x+t+dt$ is the same for all $t > 0$ as long as $x+t > \omega$. 
+
+Another simple mortality law that is very unrealistic for modelling human mortality is the constant force of mortality assumption which states that $\mu_x = \mu$ for all $x \ge 0$. Under this model, $T_x$ has an exponential distribution. 
+
+Although the De Moivre and constant force of mortality models are not useful for overall mortality for humans, they may be used in other contexts, such as modelling the failure time of machine components. We also use these models in a limited sense, to model mortality between integer ages. 
+
+The actuarial notation for survival and mortality probabilities is
+\begin{gather*}
+_tp_x = S_x(t), \qquad _tq_x = F_x(t), \qquad _u\vert_tq_x = S_x(u) - S_x(u+t)
+\end{gather*}
+the last being the probability that a life currently aged $x$ survives for $u$ years but then dies within the $t$ years after that. We drop the subscript $t$ if its value is 1 so $p_x$ is the probability that $(x)$ survives to at least age $x+1$ and $q_x$ is the probability that $(x)$ dies before age $x+1$. We call $q_x$ the mortality rate at age $x$ and $_u\vert_tq_x$ the deferred mortality probability. 
+
 \end{document}
