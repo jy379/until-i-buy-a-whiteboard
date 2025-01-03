@@ -488,4 +488,120 @@ _tp_x = S_x(t), \qquad _tq_x = F_x(t), \qquad _u\vert_tq_x = S_x(u) - S_x(u+t)
 \end{gather*}
 the last being the probability that a life currently aged $x$ survives for $u$ years but then dies within the $t$ years after that. We drop the subscript $t$ if its value is 1 so $p_x$ is the probability that $(x)$ survives to at least age $x+1$ and $q_x$ is the probability that $(x)$ dies before age $x+1$. We call $q_x$ the mortality rate at age $x$ and $_u\vert_tq_x$ the deferred mortality probability. 
 
+The complete expectation of life
+\begin{gather*}
+\mathring{e}_x = \mathbb{E}(T_x) = \int_0^{\infty} t f_x(t) dt = \int_0^{\infty} t dF_x(t)
+= - \int_0^{\infty} t d_tp_x = -\left( t_tp_x \Big\vert_0^{\infty} - \int_0^{\infty} \hspace{1mm}_tp_x dt \right)
+= \int_0^{\infty} \hspace{1mm}_tp_x dt
+\end{gather*}
+is the expected future lifetime of $(x)$.
+
+We are sometimes interested in the future lifetime random variable subject to a cap of $n$ years, which is represented by the random variable $\min(T_x, n)$. The term expectation of life
+\begin{gather*}
+\mathring{e}_{x:n|}
+= \int_0^n tf_x(t) dt + \int_n^{\infty} n f_x(t)dt
+= -\int_0^n t d_tp_x + n_np_x
+= -\left( t_tp_x \Big\vert_0^n - \int_0^n \hspace{1mm}_tp_x dt \right) + n_np_x
+= \int_0^n \hspace{1mm}_tp_x dt
+\end{gather*}
+is the expected value of $\min(T_x, n)$.
+
+The curtate future lifetime random variable
+\begin{gather*}
+K_x = \lfloor T_x \rfloor
+\end{gather*}
+is the integer part of future lifetime. For $k = 0, 1, 2, \dots$ we note that $K_x = k$ iff $(x)$ dies between the ages of $x+k$ and $x+k+1$, so
+\begin{gather*}
+\mathbb{P}(K_x = k)
+= \mathbb{P}(k \le T_x < k+1)
+=  \hspace{0mm}_kp_x - \hspace{0mm}_{k+1}p_x
+\end{gather*}
+
+The curtate expectation of life is
+\begin{gather*}
+e_x = \mathbb{E}(K_x) 
+= \sum_{k=0}^{\infty} k \mathbb{P}(K_x = k)
+= (_1p_x -  \hspace{0mm}_2p_x) + 2( \hspace{0mm}_2p_x -  \hspace{0mm}_3p_x) + 3( \hspace{0mm}_3p_x -  \hspace{0mm}_4p_x) + \dots
+= \sum_{k=1}^{\infty}  \hspace{0mm}_kp_x
+\end{gather*}
+
+Similarly we have the random variable $\min(K_x, n)$ with expectation
+\begin{gather*}
+e_{x:n|} = \sum_{k=1}^n  \hspace{0mm}_kp_x
+\end{gather*}
+
+From the trapezium approximation for integrals, we obtain the approximation
+\begin{gather*}
+\mathring{e}_x \approx e_x + \frac{1}{2}
+\end{gather*}
+
+\textbf{Exercise 2.1} You are given that
+\begin{gather*}
+p_x = 0.99, \qquad p_{x+1} = 0.985, \qquad _3p_{x+1} = 0.95, \qquad q_{x+3} = 0.02
+\end{gather*}
+Calculate $p_{x+3}$, $_2p_x$, $_2p_{x+1}$, $_3p_x$ and $_1\vert_2q_x$
+
+\textbf{Solution 2.1}
+
+\begin{gather*}
+x \to x+1 \to x+2 \qquad 1 \to 0.99 \to 0.99 \times 0.985 
+\end{gather*}
+
+\begin{gather*}
+x+1 \to x+2 \to x+3 \to x+4 \qquad 1 \to ? \to ? \to 0.95
+\end{gather*}
+
+\begin{gather*}
+x+3 \to x+4 \qquad 1 \to 0.98
+\end{gather*}
+
+So immediately have $p_{x+3} = 1 - q_{x+3} = 1 - 0.02 = 0.98$
+
+And quite immediately have $_2p_x = p_x p_{x+1} = 0.99 \times 0.985 = 0.97515$
+
+And quite immediately have $_2p_{x+1} = \hspace{1mm}_3p_{x+1} / p_{x+3} = 0.95 / 0.98 = 0.9693877551$
+
+Then we have $p_{x+2} = \hspace{1mm}_2p_{x+1} / p_{x+1} = 0.9693877551 / 0.985 = 0.98415000518$
+
+And hence $_3p_x = \hspace{1mm}_2p_x p_{x+2} = 0.97515 \times 0.98415000518 = 0.95969387755$
+
+Finally have $_1\vert_2 q_x = p_x (1 - \hspace{1mm}_2p_{x+1}) = 0.99 \times (1 - 0.9693877551) = 0.03030612245$
+
+\textbf{Exercise 2.6} The function
+\begin{gather*}
+G(x) = \frac{18000 - 110x - x^2}{18000}
+\end{gather*}
+has been proposed as the survival function $S_0(x)$ for a mortality model.
+
+What is the implied limiting age $\omega$? Verify that the function $G$ satisfies the criteria for a survival function. Calculate $_{20}p_0$. Determine the survival function for a life aged 20. Calculate $_{10}\vert_{10}q_{20}$. Calculate $\mu_{50}$.
+
+\textbf{Solution 2.6}
+
+\begin{gather*}
+G(x) = \frac{(200 + x)(90 - x)}{18000}
+\end{gather*}
+so the limiting age is 90, everyone dies by the time they are 90 years old. $G$ is a survival function since $G(0) = 1$ and $G$ is clearly smooth on $x \in (0, 90)$ and bounded on $x \in [0, 90]$ and hence has finite moments of all orders, and
+\begin{gather*}
+G'(x) = -\frac{110 + 2x}{18000} < 0
+\end{gather*}
+for $x \in [0, 90]$ so $G$ is decreasing. The probability that a newborn survives to 20 years old is
+\begin{gather*}
+_{20}p_0 = G(20) = \frac{220 \times 70}{18000} = 0.85555555555
+\end{gather*}
+The survival function for a life aged 20 is
+\begin{gather*}
+_tp_{20} = \frac{_{20+t}p_0}{_{20}p_0} = \frac{G(20+t)}{G(20)} = \frac{(220 + t)(70 - t)}{220 \times 70} = \frac{15400 - 150 t - t^2}{15400}
+\end{gather*}
+The probability that a life aged 20 survives the next 10 years and then dies within the 10 years after that, is
+\begin{gather*}
+_{10}\vert_{10}q_{20} = \hspace{1mm}_{10}p_{20} (1 - \hspace{1mm}_{10}p_{30})
+= \frac{G(30)}{G(20)} \left(1 - \frac{G(40)}{G(30)}\right)
+= \frac{230 \times 60}{220 \times 70} \left(1 - \frac{240 \times 50}{230 \times 60}\right)
+= 0.116883117
+\end{gather*}
+The force of mortality for a life aged 50 is
+\begin{gather*}
+\mu_{50} = -\frac{G'(50)}{G(50)} = \frac{110 + 2x}{(200+x)(90-x)} = \frac{210}{250 \times 40} = 0.021
+\end{gather*}
+
 \end{document}
