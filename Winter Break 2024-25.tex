@@ -604,4 +604,86 @@ The force of mortality for a life aged 50 is
 \mu_{50} = -\frac{G'(50)}{G(50)} = \frac{110 + 2x}{(200+x)(90-x)} = \frac{210}{250 \times 40} = 0.021
 \end{gather*}
 
+\textbf{3rd January 2025, Friday, 2.40pm at 5th floor of Tampines Library at Tampines Hub}
+
+\textbf{ALTAM Chapter 3 Life tables and selection}
+
+\textbf{3.1 Summary} \\
+\textbf{3.2 Life tables} \\
+\textbf{3.3 Fractional age assumptions} \\
+\textbf{3.4 National life tables} \\
+\textbf{3.5 Survival models for life insurance policyholders} \\
+\textbf{3.6 Life insurance underwriting} \\
+\textbf{3.7 Select and ultimate survival models} \\
+\textbf{3.8 Notation and formulae for select survival models}
+
+Given a survival model with survival probabilities $_tp_x$, we construct the life table for the model, from some initial age $x_0$ to a maximum or limiting age $\omega$, using a function $\{l_x\}$, $x_0 \le x \le \omega$, where $l_{x_0}$ is an arbitrary positive number called the radix of the table, and
+\begin{gather*}
+l_{x_0 + t} = l_{x_0} \hspace{0mm}_tp_{x_0}
+\end{gather*}
+More generally,
+\begin{gather*}
+l_{x+t} = l_{x_0} \hspace{0mm}_{x+t-x_0}p_{x_0}
+= l_{x_0} \hspace{0mm}_{x-x_0}p_{x_0} \hspace{0mm}_tp_x
+= l_x \hspace{0mm}_tp_x \quad\Rightarrow\quad \hspace{0mm}_tp_x = \frac{l_{x+t}}{l_x}
+\end{gather*}
+
+In some cases, a life table tabulated at integer ages also shows values of
+\begin{gather*}
+d_x = l_x - l_{x+1}
+\end{gather*}
+
+The uniform distribution of deaths (UDD) assumption is the most common fractional age assumption. It can be formulated in two equivalent ways:
+
+\textbf{UDD1} For integer $x$ and for $0 \le s < 1$, assume that
+\begin{gather*}
+\hspace{0mm}_sq_x = sq_x
+\end{gather*}
+That is, for any integer $x$, the mortality probability over $s < 1$ years is $s$ times the one-year mortality probability.
+
+\textbf{UDD2} For a life $(x)$ where $x$ is an integer, with future lifetime random variable $T_x$ and curtate future lifetime random variable $K_x$, define a new random variable $R_x$ to represent the fractional part of the future lifetime of $(x)$ lived in the year of death, so that $T_x = K_x + R_x$. We assume
+\begin{gather*}
+R_x \sim U(0, 1) \quad\mbox{ independent of }\quad K_x
+\end{gather*}
+
+An immediate consequence is that 
+\begin{gather*}
+l_{x+s} = l_x - sd_x, \qquad 0 \le s < 1
+\end{gather*}
+Thus UDD implies that $l_{x+s}$ is a linearly decreasing function of $s$ between integer ages. 
+
+\color{red}
+Furthermore,
+\begin{gather*}
+\mu_{x+s} = 
+\end{gather*}
+\color{black}
+
+A second fractional age assumption is that the force of mortality is constant between integer ages. Thus for integer $x$ and $0 \le s < 1$ we assume that $\mu_{x+s}$ does not depend on $s$, and we denote it $\mu_x^*$. We can obtain the value of $\mu_x^*$ from the life table by using the fact that
+\begin{gather*}
+p_x = e^{-\int_0^1 \mu_{x+t} dt} = e^{-\mu_x^*} \quad\Rightarrow\quad \mu_x^* = -\ln p_x
+\end{gather*}
+Furthermore, 
+\begin{gather*}
+\hspace{0mm}_tp_x = e^{-\int_0^t \mu_{x+s} ds} = e^{-t\mu_x^*} = (p_x)^t
+\end{gather*}
+More generally for $r, t > 0$ and $r + t < 1$, 
+\begin{gather*}
+\hspace{0mm}_tp_{x+r} = e^{-\int_0^t \mu_{x+r+s} ds} = e^{-t\mu_x^*} = (p_x)^t
+\end{gather*}
+
+Life tables based on the mortality experience of the whole population are regularly produced for countries around the world. Separate life tables are usually produced for males and for females and possibly for some other groups of individuals e.g. by race or socio-economic group.
+
+Suppose we have to choose a survival model appropriate for a man who is currently aged 50 and living in the UK, and who has just purchased a 10-year term insurance policy. We could use a national life table. However, in the UK, as in other countries with well-developed life insurance markets, the mortality experience of people who purchase life insurance policies tends to be different from the population as a whole. The mortality of different types of life insurance policyholders is investigated separately, and life tables appropriate for these groups are published. 
+
+\textbf{n regular exercises, m excel based exercises}
+
+\textbf{ALTAM Chapter 4 Insurance benefits}
+
+\textbf{n regular exercises, m excel based exercises}
+
+\textbf{ALTAM Chapter 5 Annuities}
+
+\textbf{n regular exercises, m excel based exercises}
+
 \end{document}
