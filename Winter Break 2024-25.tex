@@ -615,7 +615,13 @@ The force of mortality for a life aged 50 is
 \textbf{3.5 Survival models for life insurance policyholders} \\
 \textbf{3.6 Life insurance underwriting} \\
 \textbf{3.7 Select and ultimate survival models} \\
-\textbf{3.8 Notation and formulae for select survival models}
+\textbf{3.8 Notation and formulae for select survival models} \\
+\textbf{3.9 Select life tables} \\
+\textbf{3.10 Some comments on heterogeneity in mortality} \\ 
+\textbf{3.11 Mortality improvement modelling} \\
+\textbf{3.12 Mortality improvement scales}
+
+March 2025 FAM syllabus excludes sections 4, 10, 11 and 12. 
 
 Given a survival model with survival probabilities $_tp_x$, we construct the life table for the model, from some initial age $x_0$ to a maximum or limiting age $\omega$, using a function $\{l_x\}$, $x_0 \le x \le \omega$, where $l_{x_0}$ is an arbitrary positive number called the radix of the table, and
 \begin{gather*}
@@ -676,7 +682,108 @@ Life tables based on the mortality experience of the whole population are regula
 
 Suppose we have to choose a survival model appropriate for a man who is currently aged 50 and living in the UK, and who has just purchased a 10-year term insurance policy. We could use a national life table. However, in the UK, as in other countries with well-developed life insurance markets, the mortality experience of people who purchase life insurance policies tends to be different from the population as a whole. The mortality of different types of life insurance policyholders is investigated separately, and life tables appropriate for these groups are published. 
 
-\textbf{n regular exercises, m excel based exercises}
+The mortality rates in the CMI tables are based on individuals accepted for insurance at normal premium rates, that is, individuals who have passed the required health checks. This means that a man aged 50 who has just purchased a term insurance at the normal premium rate is known to be in good health, assuming the health checks are effective, and so is likely to be much healthier and hence have a lower mortality rate than a man of age 50 picked randomly from the population. When this man reaches age 56, we can no longer be certain he is in good health. All we know is that he was in good health six years ago. Hence his mortality rate at age 56 is higher than that of a man of the same age who has just passed the health checks and been permitted to buy a term insurance policy at normal rates. The effect of passing the health checks at issue eventually wears off, so that at age 62, the force of mortality does not depend on whether the policy was purchased at age 50, 52, 54 or 56. 
+
+A feature of the survival models studied in Chapter 2 is that probabilities of future survival depend only on the individual's current age. For example, for a given survival model and a given term $t$, the probability $_tp_x$ that an individual currently aged $x$ will survive to age $x+t$ depends only on the current age $x$. Such survival models are called aggregate survival models, because lives are all aggregated together. 
+
+The difference between an aggregate survival model and the survival model for term insurance policyholders discussed in Section 3.6 is that in the latter case, probabilities of future survival depend not only on current age but also on how long ago the policy was purchased, which was when the policyholder joined the group of insured lives. 
+
+The mortality of a group of individuals is described by a ``select and ultimate survival model", usually shortened to ``select survival model", if:
+\begin{enumerate}
+\item Future survival probabilities for an individual in the group depend on the individual's current age and on the age at which the individual joined the group.
+\item There is a positive number $d$, generally an integer, such that if an individual joined the group more than $d$ years ago, future survival probabilities depend only on current age. The initial selection effect is assumed to have worn off after $d$ years. 
+\end{enumerate}
+An individual who enters the group at age $x$ is said to be ``select" at age $x$. The period $d$ after which the age at selection has no effect on future survival probabilities is called the ``select period" for the model. The mortality that applies to lives after the select period is complete is called ``ultimate mortality", so that the complete model comprises a select period followed by the ultimate period. 
+
+A select survival model represents an extension of the ultimate survival model studied in Chapter 2. This requires the notation
+\begin{gather*}
+_tp_{[x]+s} = \mathbb{P}(\mbox{a life $(x+s)$ select at aged $x$ survives to age $x+s+t$})
+\end{gather*}
+\begin{gather*}
+_tq_{[x]+s} = \mathbb{P}(\mbox{a life $(x+s)$ select at aged $x$ does not survive to age $x+s+t$})
+\end{gather*}
+\begin{gather*}
+\mu_{[x]+s} = \lim_{h\to0^+} \frac{1 - \hspace{0mm}_hp_{[x]+s}}{h} = \mbox{force of mortality at age $x+s$ for a life select at age $x$}
+\end{gather*}
+From these definitions we can obtain
+\begin{gather*}
+_tp_{[x]+s} = e^{-\int_0^t \mu_{[x]+s+u} du}
+\end{gather*}
+
+For an ultimate survival model the life table $\{l_x\}$ is useful since it can be used to calculate probabilities of survival. We can construct a select life table in a similar way but we need the table to reflect duration since selection, as well as age, during the select period. Select life tables are usually presented at integer ages only, just as for the aggregated life tables. 
+
+\textbf{14 regular exercises, 0 excel based exercises}
+
+\textbf{Exercise 3.2} You are given the following life table extract:
+\begin{gather*}
+l_{52} = 89948, \qquad l_{53} = 89089, \qquad l_{54} = 88176, \qquad l_{55} = 87208, \\ 
+l_{56} = 86181, \qquad l_{57} = 85093, \qquad l_{58} = 83940, \qquad l_{59} = 82719 
+\end{gather*}
+Calculate each of the following probabilities assuming (i) uniform distribution of deaths between integer ages, and (ii) a constant force of mortality between integer ages:
+\begin{gather*}
+\hspace{0mm}_{0.2}q_{52.4}, \qquad \hspace{0mm}_{5.7}p_{52.4}, \qquad \hspace{0mm}_{3.2}\vert_{2.5}q_{52.4}
+\end{gather*}
+
+\textbf{Solution 3.2} Assuming uniform distribution of deaths between integer ages,
+\begin{align*}
+l_{52.4} &= 0.6 \times 89948 + 0.4 \times 89089 = 89604.4, \\ 
+l_{52.6} &= 0.4 \times 89948 + 0.6 \times 89089 = 89432.6, \\
+l_{55.6} &= 0.4 \times 87208 + 0.6 \times 86181 = 86591.8, \\
+l_{58.1} &= 0.9 \times 83940 + 0.1 \times 82719 = 83817.9
+\end{align*}
+so
+\begin{align*}
+\hspace{0mm}_{0.2}q_{52.4} &= 1 - \frac{l_{52.6}}{l_{52.4}} = 0.001917317, \\ 
+\hspace{0mm}_{5.7}p_{52.4} &= \frac{l_{58.1}}{l_{52.4}} = 0.935421698, \\ 
+\hspace{0mm}_{3.2}\vert_{2.5}q_{52.4} &= \frac{l_{55.6}}{l_{52.4}} \left(1 - \frac{l_{58.1}}{l_{55.6}}\right) = 0.030957185
+\end{align*}
+
+Assuming a constant force of mortality between integer ages, 
+\begin{align*}
+l_{52.4} &= 89948^{0.6} 89089^{0.4} = 89603.41054, \\
+l_{52.6} &= 89948^{0.4} 89089^{0.6} = 89431.61118, \\
+l_{55.6} &= 87208^{0.4} 86181^{0.6} = 86590.34064, \\
+l_{58.1} &= 83940^{0.9} 82719^{0.1} = 83817.09332
+\end{align*}
+so
+\begin{align*}
+\hspace{0mm}_{0.2}q_{52.4} &= 1 - \frac{l_{52.6}}{l_{52.4}} = 0.001917331, \\ 
+\hspace{0mm}_{5.7}p_{52.4} &= \frac{l_{58.1}}{l_{52.4}} = , 0.935423025 \\ 
+\hspace{0mm}_{3.2}\vert_{2.5}q_{52.4} &= \frac{l_{55.6}}{l_{52.4}} \left(1 - \frac{l_{58.1}}{l_{55.6}}\right) = 0.030950243
+\end{align*}
+
+\textbf{Exercise 3.8} A group of 100,000 independent lives each aged 65 purchases one-year term insurance. At the start, 20\% of the group are preferred lives with $q_{65} = 0.002$ and 80\% of the group are normal lives with $q_{65} = 0.009$. 
+\begin{enumerate}[label = (\alph*)]
+\item Calculate the standard deviation of the number of survivors at the end of the year.
+\item Calculate the proportion of preferred lives expected in the survivor group.
+\item Using a normal approximation without continuity correction, calculate the 90th percentile of the number of survivors at the end of the year.
+\end{enumerate}
+
+\textbf{Solution 3.8}
+\begin{gather*}
+\mathbb{P}(\mbox{preferred}) = 0.2, \qquad \mathbb{P}(\mbox{normal}) = 0.8, \qquad
+\mathbb{P}(\mbox{survive}|\mbox{preferred}) = 0.998, \qquad
+\mathbb{P}(\mbox{survive}|\mbox{normal}) = 0.991
+\end{gather*}
+\begin{gather*}
+\mathbb{P}(\mbox{survive}) = 0.9924, \qquad \mbox{stdev} = \sqrt{100,000 \times 0.9924(1 - 0.9924)} = 27.463
+\end{gather*}
+\color{red}
+\textbf{Actually maybe we should calculate the standard deviation of each type of life separately and add up within each population as in}
+\begin{gather*}
+\sqrt{20,000 \times 0.998 \times 0.002 + 80,000 \times 0.991 \times 0.009} = 27.44886154
+\end{gather*}
+\color{black}
+Expected number of surviving preferred lives $= 0.998 \times 20,000 = 19960$ \\
+Expected number of surviving normal lives $= 0.991 \times 80,000 = 79280$ \\
+Proportion of preferred lives expected in survivor group $= 19960 / (19960 + 79280) = 0.201128577$
+\begin{gather*}
+\mbox{mean number of survivors} = 99240, \qquad \mbox{stdev number of survivors} = 27.463
+\end{gather*}
+Standard normal 90th percentile is 1.28 so our 90th percentile $x$ is given by
+\begin{gather*}
+\frac{x - 99240}{27.463} = 1.28 \quad\Rightarrow\quad x = 99275.15264
+\end{gather*}
 
 \textbf{ALTAM Chapter 4 Insurance benefits}
 
