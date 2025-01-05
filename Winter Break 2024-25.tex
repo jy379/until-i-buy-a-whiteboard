@@ -785,11 +785,265 @@ Standard normal 90th percentile is 1.28 so our 90th percentile $x$ is given by
 \frac{x - 99240}{27.463} = 1.28 \quad\Rightarrow\quad x = 99275.15264
 \end{gather*}
 
+\textbf{4th January 2025, Saturday 2.58pm at 4th floor of Bishan Library}
+
 \textbf{ALTAM Chapter 4 Insurance benefits}
+
+\textbf{4.1 Summary} \\
+\textbf{4.2 Introduction} \\
+\textbf{4.3 Assumption} \\
+\textbf{4.4 Valuation of insurance benefits} \\
+\textbf{4.5 Relating $\overline{A}_x$, $A_x$ and $A^{(m)}_x$} \\
+\textbf{4.6 Variable insurance benefits} \\
+\textbf{4.7 Functions for select lives}
+
+In this chapter we develop formulae for the valuation of traditional insurance benefits: whole life, term and endowment insurance. 
+
+In the previous two chapters we looked at models for future lifetime. The main reason that we need these models is to apply them to the valuation of payments which are dependent on the death or survival of a policyholder or pension plan member. 
+
+To perform calculations in this chapter, we require assumptions about mortality and interest. For mortality, we assume the standard ultimate survival model given by Makeham's law
+\begin{gather*}
+\mu_x = A + Bc^x, \qquad A = 0.00022, \qquad B = 2.7 \times 10^{-6}, \qquad c = 1.124
+\end{gather*}
+We also assume that interest rates are constant. 
+
+Given an effective annual rate of interest $i > 0$ we use $\nu = 1/(1+i)$ so that the present value of a payment of $S$ which is to be paid in $t$ years' time is $S\nu^t$. The force of interest per year, also known as the continuously compounded interest rate, is
+\begin{gather*}
+\delta = \ln(1+i), \qquad 1+i = e^{\delta}, \qquad \nu = e^{-\delta}
+\end{gather*}
+The nominal rate of interest compounded $p$ times per year is denoted $i^{(p)}$ and is defined by
+\begin{gather*}
+1+ i = (1+i^{(p)}/p)^p
+\end{gather*}
+The effective rate of discount per year is
+\begin{gather*}
+d = 1 - \nu = i\nu = 1 - e^{-\delta}
+\end{gather*}
+and the nominal rate of discount compounded $p$ times per year is $d^{(p)}$ defined by
+\begin{gather*}
+(1-d^{(p)}/p)^p = \nu
+\end{gather*}
+
+The ``expected present value" or ``actuarial present value" of a benefit of \$1 payable following the death of a life currently aged $x$ is
+\begin{gather*}
+\overline{A}_x = \mathbb{E}(e^{-\delta T_x}) = \int_0^{\infty} e^{-\delta t} \hspace{0mm}_tp_x \mu_{x+t} dt
+\end{gather*}
+The second moment of the present value of the death benefit is
+\begin{gather*}
+^2\overline{A}_x = \int_0^{\infty} e^{-2\delta t} \hspace{0mm}_tp_x \mu_{x+t} dt
+\end{gather*}
+The variance of the present value of a unit benefit payable immediately on death is
+\begin{gather*}
+^2\overline{A}_x - (\overline{A}_x)^2
+\end{gather*}
+
+Suppose now that the benefit if \$1 is payable at the end of the year of death of $(x)$ rather than immediately on death. The EPV of the benefit is
+\begin{gather*}
+A_x = \mathbb{E}(\nu^{K_x + 1}) = \nu q_x + \nu^2 \hspace{0mm}_1\vert q_x + \nu^3 \hspace{0mm} _2\vert q_x + \dots
+\end{gather*}
+The second moment is
+\begin{gather*}
+^2A_x = \mathbb{E}(\nu^{K_x + 1}) = \nu^2 q_x + \nu^4 \hspace{0mm}_1\vert q_x + \nu^6 \hspace{0mm} _2\vert q_x + \dots
+\end{gather*}
+The variance is
+\begin{gather*}
+^2A_x - (A_x)^2
+\end{gather*}
+
+Using an annual life table, we can calculate the values of $A_x$ using backward recursion:
+\begin{gather*}
+A_x = \nu q_x + \nu p_x A_{x+1}
+\end{gather*}
+
+Under a term insurance policy, the death benefit is payable only if the policyholder dies within a fixed term of say $n$ years. In the continuous case, the benefit is payable immediately on death. The EPV of this benefit is
+\begin{gather*}
+\overline{A}_{x:n|}^1 = \int_0^n e^{-\delta t} \hspace{0mm}_tpx \mu_{x+t} dt
+\end{gather*}
+and the expected value of the square of the present value is
+\begin{gather*}
+\hspace{0mm}^2\overline{A}_{x:n|}^1 = \int_0^n e^{-2\delta t} \hspace{0mm}_tpx \mu_{x+t} dt
+\end{gather*}
+
+If the death benefit of 1 is payable at the end of the year of death, provided this occurs within $n$ years, the EPV is
+\begin{gather*}
+A_{x:n|}^1 = \sum_{k=0}^{n-1} \nu^{k+1} \hspace{0mm}_k\vert q_x
+\end{gather*}
+
+Pure endowment benefits are conditional on the survival of the policyholder at the policy maturity date. The EPV of a pure endowment of \$1 issued to a life aged $x$ with a term of $n$ years, is
+\begin{gather*}
+\hspace{0mm}_nE_x = \nu^n \hspace{0mm}_np_x
+\end{gather*}
+
+An endowment insurance provides a combination of a term insurance and a pure endowment. The sum insured is payable on the death of $(x)$ if $(x)$ dies within a fixed term, say $n$ years, but if $(x)$ survives $n$ years, the sum insured is payable at the end of the $n$th year. 
+
+In the case where the death benefit of amount 1 is payable immediately on death, the EPV is
+\begin{gather*}
+\overline{A}_{x:n|} = \overline{A}_{x:n|}^1 + \hspace{0mm}_nE_x
+\end{gather*}
+
+In the situation where the death benefit is payable at the end of the year of death, the EPV is
+\begin{gather*}
+A_{x:n|} = A_{x:n|}^1 + \hspace{0mm}_nE_x
+\end{gather*}
+
+Deferred insurance refers to insurance which does not begin to offer death benefit cover until the end of a deferred period. 
+
+The force of mortality $\mu_x$ is defined by
+\begin{gather*}
+S_0(x) = e^{-\int_0^x \mu_s ds} \quad\Leftrightarrow\quad S_0'(x) = -\mu_x S_0(x) \quad\Leftrightarrow\quad
+\mu_x = -\frac{1}{S_0(x)} \lim_{h \to 0^+} \frac{S_0(x+h) - S_0(x)}{h}
+\end{gather*}
+so more generally we have
+\begin{gather*}
+S_x(t) = \frac{S_0(x+t)}{S_0(x)} = e^{-\int_x^{x+t} \mu_s ds}
+\end{gather*}
+In any case,
+\begin{gather*}
+f_x(t) = F_x'(t) = - S_x'(t) = \mu_{x+t} S_x(t) = \hspace{0mm}_tp_x \mu_{x+t}, \qquad x, t \in \mathbb{R}_{\ge 0}
+\end{gather*}
+
+Under the UDD assumption, for integer $x$ and real $t \in (0, 1)$, have linear interpolation
+\begin{gather*}
+\hspace{0mm}_tp_x = (1-t) + tp_x = e^{-\int_0^t \mu_{x+s} ds} \quad\Rightarrow\quad
+p_x - 1 = (-\mu_{x+t}) \hspace{0mm}_tp_x
+\end{gather*}
+by differentiating both sides wrt $t$. Since $q_x = 1 - p_x$, it follows that
+\begin{gather*}
+\hspace{0mm}_tp_x \mu_{x+t} = q_x, \qquad x \in \mathbb{Z}_{\ge 0}, \qquad t \in (0, 1)
+\end{gather*}
+so
+\begin{gather*}
+f_x(t) = q_x, \qquad x \in \mathbb{Z}_{\ge 0}, \qquad t \in (0, 1)
+\end{gather*}
+depends only on the integer $x$ and not on the fractional part $t$. ``Uniform Distribution of Deaths" is a good name indeed. For general $s = k + t \in \mathbb{R}_{\ge t0}$ comprising of integer part $k \in \mathbb{Z}_{\ge 0}$ and fractional part $t \in (0, 1)$, have
+\begin{gather*}
+f_x(s) = f_x(k+t) = \hspace{0mm}_{k+t}p_x \mu_{x+k+t} = \hspace{0mm}_kp_x \hspace{1mm}_tp_{x+k} \hspace{1mm} \mu_{x+k+t}
+= \hspace{0mm}_kp_x q_{x+k} = \mathbb{P}(k \le T_x < k)
+\end{gather*}
+
+Hence
+\begin{align*}
+\overline{A}_x
+&= \int_0^{\infty} e^{-\delta s} f_x(s) ds \\
+&= \sum_{k = 0}^{\infty} \left( \int_k^{k+1} e^{-\delta s} f_x(s) ds \right) \\
+&= \sum_{k = 0}^{\infty} \left( \mathbb{P}(k \le T_x < k) \hspace{1mm} \int_k^{k+1} e^{-\delta s} ds \right) \\
+&= \sum_{k = 0}^{\infty} \left( \mathbb{P}(k \le T_x < k) \hspace{1mm} \frac{e^{-\delta k} - e^{-\delta(k+1)}}{\delta} \right) \\
+&= \frac{e^{\delta} - 1}{\delta} \sum_{k = 0}^{\infty} e^{-\delta (k+1)} \mathbb{P}(k \le T_x < k)
+= \frac{e^{\delta} - 1}{\delta} A_x = \frac{i}{\delta} A_x
+\end{align*}
+
+Similarly,
+\begin{gather*}
+\overline{A}_x = \frac{i^{(m)}}{\delta} A^{(m)}_x \quad\Rightarrow\quad A^{(m)}_x = \frac{i}{i^{(m)}}A_x
+\end{gather*}
+
+It took me a while to sort out and derive the above results. Probably just memorise them for the exam. 
+
+We stress that these approximations apply only to death benefits. An endowment insurance combines the death and survival benefits, so we need to split off the death benefit before applying the above formulas. So under the UDD assumption,
+\begin{gather*}
+\overline{A}_{x:n|} \approx \frac{i}{\delta} A_{x:n|}^1 + \hspace{0mm}_nE_x
+\end{gather*}
+
+\color{red}
+\textbf{4.5.2 Using the claims acceleration approach}
+\color{black}
+
+\textbf{32 regular exercises, 2 excel based exercises}
+
+\textbf{Exercise 4.1} You are given the following table of values for $l_x$ and $A_x$, assuming an effective interest rate of $6\%$ per year. Calculate
+\begin{gather*}
+\hspace{0mm}_5E_{35}, \qquad A_{35:5|}^1, \qquad \hspace{0mm}_5\vert A_{35}, \qquad \overline{A}_{35:5|}
+\end{gather*}
+assuming UDD between integer ages where necessary. 
+
+\textbf{Solution 4.1}
+\begin{gather*}
+\hspace{0mm}_5E_{35} = \frac{1}{1.06^5} \frac{l_{40}}{l_{35}} = 0.735972183
+\end{gather*}
+\begin{align*}
+\mathbb{P}(35 < T_x < 36) &= 1 - l_{36}/l_{35} = 0.0026285 \\
+\mathbb{P}(36 < T_x < 37) &= (l_{36}/l_{35})(1- l_{37}/l_{36}) = l_{36}/l_{35} - l_{37}/l_{35} = 0.0028124 \\
+\mathbb{P}(37 < T_x < 38) &=  l_{37}/l_{35} - l_{38}/l_{35} = 0.0030119 \\
+\mathbb{P}(38 < T_x < 39) &=  l_{38}/l_{35} - l_{39}/l_{35} = 0.0032281 \\
+\mathbb{P}(39 < T_x < 40) &=  l_{39}/l_{35} - l_{40}/l_{35} = 0.0034623
+\end{align*}
+\begin{align*}
+A_{35:5|}^1 
+&= \frac{\mathbb{P}(35 < T_x < 36)}{1.06} 
++ \frac{\mathbb{P}(36 < T_x < 37)}{1.06^2} 
++ \frac{\mathbb{P}(37 < T_x < 38)}{1.06^3} 
++ \frac{\mathbb{P}(38 < T_x < 39)}{1.06^4} 
++ \frac{\mathbb{P}(39 < T_x < 40)}{1.06^5} \\
+&= 0.012655782
+\end{align*}
+\begin{gather*}
+\hspace{0mm}_5\vert A_{35} = \hspace{0mm}_5p_{35} \frac{A_{40}}{1.06^5} = 0.9848569 \times 0.140852188 = 0.138719235
+\end{gather*}
+\begin{gather*}
+\overline{A}_{35:5|}
+= \overline{A}_{35:5|}^1 + \hspace{0mm}_5E_{35} 
+\approx \frac{i}{\delta} A_{35:5|}^1 + \hspace{0mm}_5E_{35} 
+= \frac{0.06}{\ln 1.06} 0.012655782 + 0.735972183
+= 0.749003951
+\end{gather*}
+
+\textbf{Exercise 4.18} You are given the following excerpt from a select life table. Assuming an interest rate of $6\%$ per year, calculate
+\begin{enumerate}[label=(\alph*)]
+\item $A_{[40]+1:4|}$
+\item the standard deviation of the present value of a four-year term insurance, deferred one year, issued to a newly selected life aged 40, with sum insured \$100,000 payable at the end of the year of death
+\item \color{red}the probability that the present value of the benefit described in part (b) is less than or equal to \$85,000 \color{black}
+\end{enumerate}
+
+\textbf{Solution 4.18}
+\begin{align*}
+A_{[40]+1:4|}
+&= \left( 1 - \frac{l_{[40]+2}}{l_{[40]+1}} \right) \frac{1}{1.06}
++ \left( \frac{l_{[40]+2}}{l_{[40]+1}} - \frac{l_{[40]+3}}{l_{[40]+1}} \right) \frac{1}{1.06^2} \\
+&+ \left( \frac{l_{[40]+3}}{l_{[40]+1}}  - \frac{l_{44}}{l_{[40]+1}} \right) \frac{1}{1.06^3}
++ \left( \frac{l_{44}}{l_{[40]+1}} - \frac{l_{45}}{l_{[40]+1}} \right) \frac{1}{1.06^4} 
++ \frac{l_{45}}{l_{[40]+1}} \frac{1}{1.06^4} \\
+&= 0.792669005
+\end{align*}
+\begin{gather*}
+\mathbb{E}(X) = \frac{l_{[40]+1}}{l_{[40]}} \frac{1}{1.06} \left(A_{[40]+1:4|} - \frac{l_{45}}{l_{[40]+1}} \frac{1}{1.06^4} \right)
+= 0.007013483
+\end{gather*}
+\begin{align*}
+\mathbb{E}(X^2)
+&= \left( \frac{l_{[40]+1}}{l_{[40]}} - \frac{l_{[40]+2}}{l_{[40]}} \right) \frac{1}{1.06^4}
++ \left( \frac{l_{[40]+2}}{l_{[40]}} - \frac{l_{[40]+3}}{l_{[40]}} \right) \frac{1}{1.06^6} \\
+&+ \left( \frac{l_{[40]+3}}{l_{[40]}}  - \frac{l_{44}}{l_{[40]}} \right) \frac{1}{1.06^8}
++ \left( \frac{l_{44}}{l_{[40]}} - \frac{l_{45}}{l_{[40]}} \right) \frac{1}{1.06^{10}}  = 0.005703787
+\end{align*}
+\begin{gather*}
+100,000 \times \mbox{stdev}(X) 
+= 100,000 \times \sqrt{\mathbb{E}(X^2) - \mathbb{E}(X)^2} 
+= 7519.706149
+\end{gather*}
+\color{red}
+Approximating the present value of benefit random variable $X$ as normal with the above expectation and variance, 
+\begin{align*}
+\mathbb{P}(X < 85,000)
+&= \mathbb{P} \left( \frac{X - 701.3483}{7519.706149} < \frac{85,000 - 701.3483}{7519.706149} \right) \\
+&= \mathbb{P} \left( \frac{X - 701.3483}{7519.706149} < 11.21\right)
+\end{align*}
+\color{black}
+
+\textbf{ALTAM Chapter 5 Annuities}
+
+\textbf{5.1 Summary}
 
 \textbf{n regular exercises, m excel based exercises}
 
-\textbf{ALTAM Chapter 5 Annuities}
+\textbf{ALTAM Chapter 6 Premium Calculation}
+
+\textbf{6.1 Summary}
+
+\textbf{n regular exercises, m excel based exercises}
+
+\textbf{ALTAM Chapter 7 Policy Values}
+
+\textbf{7.1 Summary}
 
 \textbf{n regular exercises, m excel based exercises}
 
