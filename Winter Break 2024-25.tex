@@ -1154,7 +1154,10 @@ and countably subadditive.
 \textbf{ALTAM Chapter 8 Policy Values}
 
 \textbf{8.1 Summary} \\
-\textbf{8.2 Examples of multiple state models}
+\textbf{8.2 Examples of multiple state models} \\
+\textbf{8.3 Assumptions and notation} \\
+\textbf{8.4 Formulae for probabilities} \\
+\textbf{8.5 Numerical evaluation of probabilities}
 
 Suppose we have a life aged $x \ge 0$ at time $t = 0$. For each $t \ge 0$ we define a random variable $Y(t)$ which takes one of the two values 0 or 1. The event $\{Y(t) = 0\}$ means that our individual is alive at age $x+t$ and the event $\{Y(t) = 1\}$ means that our individual died before age $x+t$. The set of random variables $\{Y(t)\}_{t \ge 0}$ is an example of a continuous time stochastic process. The future lifetime random variable is then
 \begin{gather*}
@@ -1162,6 +1165,110 @@ T_x = \max\{t : Y(t) = 0\}
 \end{gather*}
 
 Suppose we are interested in a term insurance policy under which the death benefit is \$100,000 if death is due to an accident during the policy term and \$50,000 if it is due to any other cause. An appropriate model has 3 states, and we can define a continuous time stochastic process $\{Y(t)\}_{t \ge 0}$ where each random variable $Y(t)$ takes one of the values 0, 1 or 2. Hence for example the event $\{Y(t) = 1\}$ indicates that the individual who was aged $x$ at time $t = 0$ has died from an accident before age $x+t$. The difference is that now we distinguish between deaths due to accident and deaths due to other causes. Notice that it is the benefits provided by the insurance policy that determine the design of the model. Because the benefit is contingent on the cause of death, the model must specify the cause of death appropriately. 
+
+Figure 8.3 shows a model appropriate for a policy which provides some or all of the following payments:
+\begin{enumerate}[label=(\roman*)]
+\item an annuity while permanently disabled
+\item a lump sum on becoming permanently disabled
+\item a lump sum on death
+\item premiums payable while healthy
+\end{enumerate}
+An important feature of this model is that disability is permanent - there is no arrow from State 1 back to State 0. 
+
+Figure 8.4 shows the sickness-death model which can be used for a policy which provides an annuity during periods of sickness, with premiums payable while the person is healthy. It could also be used for valuing lump sum payments contingent on becoming sick or dying. The model represented by Figure 8.4 differs from that in Figure 8.3 in only one respect: it is possible to transfer from State 1 to State 0, that is, to recover from an illness. This model illustrates an important general feature of multiple state models - the possibility of entering one or more states many times. 
+
+In this section we consider a general multiple state model. We have a finite set of $m+1$ states labelled $0, 1, \dots, m$ with instantaneous transitions being possible between selected pairs of states. These states represent different conditions for an individual. For each $t \ge 0$, the random variable $Y(t)$ takes one of the values $0, 1, \dots, m$ and we interpret the event $Y(t) = i$ to mean that the individual is in State $i$ at age $x+t$. The set of random variables $\{Y(t)\}_{t \ge 0}$ is then a continuous time stochastic process. 
+
+\textbf{Assumption 8.1} We assume that for any states $i$ and $j$ and any times $t$ and $t+s$ where $s \ge 0$, the conditional probability
+\begin{gather*}
+\mathbb{P}(Y(t+s) = j \vert Y(t) = i)
+\end{gather*}
+is well defined, in the sense that its value does not depend on any information about the process before time $t$.
+
+Intuitively, this means that the probabilities of future events for the process are completely determined by knowing the current state of the process. This is known as the Markov property. 
+
+\textbf{Assumption 8.2} We assume that for any positive interval of time $h$,
+\begin{gather*}
+\mathbb{P}(\mbox{2 or more transitions within a time period of length $h$}) = o(h)
+\end{gather*}
+
+Recall that a function $g(h)$ is said to be $o(h)$ if
+\begin{gather*}
+\lim_{h \to 0} \frac{g(h)}{h} = 0
+\end{gather*}
+Intuitively a function is $o(h)$ if it converges to zero faster than $h$ does when $h$ tends to zero. 
+
+For states $i$ and $j$ in a multiple state model and for $x, t \ge 0$, we define
+\begin{gather*}
+\hspace{0mm}_tp_x^{ij} = \mathbb{P}(Y(x+t) = j \vert Y(x) = i), \qquad
+\hspace{0mm}_tp_x^{\overline{ii}} = \mathbb{P}(Y(x+s) = i \mbox{ for all $s \in [0, t]$ } \vert Y(x) = i)
+\end{gather*}
+We define the ``force of transition" or ``transition intensity" between states $i$ and $j$ at age $x$ to be
+\begin{gather*}
+\mu_x^{ij} = \lim_{h\to0^+} \frac{\hspace{0mm}_hp_x^{ij}}{h} \quad\mbox{ for $i \ne j$}
+\end{gather*}
+Equivalently,
+\begin{gather*}
+\hspace{0mm}_hp_x^{ij} = h\mu_x^{ij} + o(h) \quad\mbox{ for $i \ne j$}
+\end{gather*}
+
+\textbf{Assumption 8.3} For all states $i$ and $j$ and all ages $x \ge 0$ we assume that $_tp_x^{ij}$ is a differentiable function of $t$.
+
+\color{red}
+\textbf{Example 8.3 is foundational and important; I did it but made a few mistakes here and there and missed out on one trick; definitely do this again}
+\color{black}
+
+For any State $i$ in a multiple state model with $m+1$ states satisfying the usual assumptions,
+\begin{gather*}
+\hspace{0mm}_{t+h}p_x^{\overline{ii}} = \hspace{0mm}_tp_x^{\overline{ii}} \hspace{0mm}_hp_{x+t}^{\overline{ii}}, \qquad x, t, h \ge 0
+\end{gather*}
+For small $h$,
+\begin{gather*}
+\hspace{0mm}_hp_{x+t}^{\overline{ii}} = 1 - h \sum_{j \ne i} \mu_{x+t}^{ij} + o(h)
+\quad\Rightarrow\quad \frac{\hspace{0mm}_{t+h}p_x^{\overline{ii}} - \hspace{0mm}_tp_x^{\overline{ii}}}{h} 
+= \hspace{0mm}_tp_x^{\overline{ii}} \left( - \sum_{j\ne i} \mu_{x+t}^{ij} + \frac{o(h)}{h} \right)
+\end{gather*}
+Taking the limit $h \to 0$,
+\begin{gather*}
+\frac{d}{dt} \hspace{1mm}_tp_x^{\overline{ii}} = \hspace{0mm}_tp_x^{\overline{ii}} \left( -\sum_{j \ne i} \mu_{x+t}^{ij} \right)
+\quad\Rightarrow\quad \hspace{0mm}_tp_x^{\overline{ii}} = \exp\left(-\int_0^t \sum_{j \ne i} \mu_{x+s}^{ij} ds\right)
+\end{gather*}
+
+\textbf{Example 8.4} For the model for permanent disability illustrated in Figure 8.3,
+\begin{align*}
+\hspace{0mm}_{t+h}p_x^{01}
+&= \hspace{0mm}_tp_x^{01} \hspace{0mm}_hp_{x+t}^{\overline{11}}
++ \hspace{0mm}_tp_x^{\overline{00}} \hspace{0mm}_hp_{x+t}^{01} \\
+&= \hspace{0mm}_tp_x^{01} (1 - h\mu_{x+t}^{12})
++ \hspace{0mm}_tp_x^{\overline{00}} h\mu_{x+t}^{01} + o(h)
+\end{align*}
+so
+\begin{gather*}
+\frac{\hspace{0mm}_{t+h}p_x^{01} - \hspace{0mm}_tp_x^{01}}{h}
+= -\hspace{0mm}_tp_x^{01} \mu_{x+t}^{12} + \hspace{0mm}_tp_x^{\overline{00}} \mu_{x+t}^{01} + \frac{o(h)}{h}
+\end{gather*}
+Letting $h \to 0$, 
+\begin{gather*}
+\frac{d}{dt} \hspace{1mm}_tp_x^{01} = -\hspace{0mm}_tp_x^{01} \mu_{x+t}^{12} + \hspace{0mm}_tp_x^{\overline{00}} \mu_{x+t}^{01}
+\end{gather*}
+Observe the integrating factor and obtain
+\begin{align*}
+\frac{d}{dt} \left( \hspace{0mm}_tp_x^{01} \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) \right)
+&= \left( \frac{d}{dt} \hspace{1mm}_tp_x^{01} + \hspace{0mm}_tp_x^{01} \mu_{x+t}^{12} \right) \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) \\ &= \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) \hspace{0mm}_tp_x^{\overline{00}} \mu_{x+t}^{01}
+\end{align*}
+In the case of the permanent disability model where a person starting from the disability state 1 can only either stay put or jump to the death state 2,
+\begin{gather*}
+\hspace{0mm}_tp_x^{\overline{11}} = \exp \left( - \int_0^t \mu_{x+s}^{12} ds \right) \quad\Rightarrow\quad
+\hspace{0mm}_{u-t}p_{x+t}^{\overline{11}} = \exp \left( - \int_t^u \mu_{x+s}^{12} ds \right)
+\end{gather*}
+\begin{align*}
+\frac{d}{dt} \left( \frac{\hspace{0mm}_tp_x^{01}}{\hspace{0mm}_tp_x^{\overline{11}}} \right)
+= \hspace{0mm}_tp_x^{\overline{00}} \mu_{x+t}^{01} \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) 
+\quad&\Rightarrow\quad
+\frac{\hspace{0mm}_up_x^{01}}{\hspace{0mm}_up_x^{\overline{11}}} = \int_0^u \hspace{0mm}_tp_x^{\overline{00}} \mu_{x+t}^{01} \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) dt \\
+&\Rightarrow\quad \hspace{0mm}_up_x^{01}
+= \int_0^u \hspace{0mm}_tp_x^{\overline{00}} \mu_{x+t}^{01} \exp \left( - \int_t^u \mu_{x+s}^{12} ds \right) dt
+\end{align*}
 
 \textbf{$n$ regular exercises, $m$ excel based exercises}
 
