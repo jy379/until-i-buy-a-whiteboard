@@ -1157,7 +1157,9 @@ and countably subadditive.
 \textbf{8.2 Examples of multiple state models} \\
 \textbf{8.3 Assumptions and notation} \\
 \textbf{8.4 Formulae for probabilities} \\
-\textbf{8.5 Numerical evaluation of probabilities}
+\textbf{8.5 Numerical evaluation of probabilities} \\
+\textbf{8.6 State-dependent insurance and annuity functions} \\
+\textbf{8.7 Premiums}
 
 Suppose we have a life aged $x \ge 0$ at time $t = 0$. For each $t \ge 0$ we define a random variable $Y(t)$ which takes one of the two values 0 or 1. The event $\{Y(t) = 0\}$ means that our individual is alive at age $x+t$ and the event $\{Y(t) = 1\}$ means that our individual died before age $x+t$. The set of random variables $\{Y(t)\}_{t \ge 0}$ is an example of a continuous time stochastic process. The future lifetime random variable is then
 \begin{gather*}
@@ -1270,6 +1272,191 @@ In the case of the permanent disability model where a person starting from the d
 = \int_0^u \hspace{0mm}_tp_x^{\overline{00}} \mu_{x+t}^{01} \exp \left( - \int_t^u \mu_{x+s}^{12} ds \right) dt
 \end{align*}
 
+\textbf{7th January 2025, Tuesday, 2.54pm at the 7th floor of the National Library at Bugis}
+
+For any time $t \ge 0$ and states $i, j$ and small $h > 0$, if a life $(x)$ starts in state $i$ at time 0, 
+\begin{gather*}
+\hspace{0mm}_{t+h}p_x^{ij} 
+= \hspace{0mm}_tp_x^{ij} \left( 1 - \sum_{k \ne j} h \mu_{x+t}^{jk} \right) 
++ \sum_{k \ne j} \hspace{0mm}_tp_x^{ik} h \mu_{x+t}^{kj} + o(h)
+\end{gather*}
+because either the life $(x)$ transitions from state $i$ to state $j$ at time $t$ and then remains in state $j$ for the short time from $t$ to $t+h$, or the life transitions from state $i$ to some other state $k$ at time $t$ and then transitions from that state $k$ to state $j$ during that short time from $t$ to $t+h$. Rearranging and taking the limit as $h \to 0$ from above,
+\begin{gather*}
+\frac{d}{dt} \hspace{1mm}_tp_x^{ij}
+= \lim_{h \to 0^+} \frac{\hspace{0mm}_{t+h}p_x^{ij} - \hspace{0mm}_tp_x^{ij}}{h}
+= \sum_{k \ne j} \hspace{0mm}_tp_x^{ik} \mu_{x+t}^{kj} - \sum_{k \ne j} \hspace{0mm}_tp_x^{ij} \mu_{x+t}^{jk}, \qquad i, j \in I
+\end{gather*}
+These are the celebrated ``forward" equations A. Kolmogorov, a linear system of $|I|^2$ first order ODEs in $|I|^2$ variables $_tp_x^{ij}$ over all $i, j \in I$ with initial condition
+\begin{gather*}
+_0p_x^{ij} = \delta_{ij}
+\end{gather*}
+
+\textbf{Example 8.5} Consider the permanent disability model illustrated in Figure 8.3. 
+\begin{enumerate}[label=(\alph*)]
+\item Suppose the transition intensities for this model are all constants,
+\begin{gather*}
+\mu_x^{01} = 0.0279, \qquad \mu_x^{02} = \mu_x^{12} = 0.0229
+\end{gather*}
+Calculate $_{10}p_{60}^{00}$ and $_{10}p_{60}^{01}$.
+\item Now suppose the transition intensities are
+\begin{gather*}
+\mu_x^{01} = a_1 + b_1 e^{c_1 x}, \qquad \mu_x^{02} = \mu_x^{12} = a_2 + b_2 e^{c_2 x}
+\end{gather*}
+Calculate $_{10}p_{60}^{00}$ and $_{10}p_{60}^{01}$.
+\end{enumerate}
+
+\textbf{Solution 8.5} In the permanent disability model, we cannot return to state 0 once we have left it, and the only transitions out of state 0 are to states 1 and 2, so 
+\begin{gather*}
+_tp_x^{00} = \hspace{0mm}_tp_x^{\overline{00}} = \exp \left( - \int_0^t \mu_{x+s}^{01} + \mu_{x+s}^{02} ds \right)
+\end{gather*}
+
+For the situation (a), this is simply
+\begin{gather*}
+_{10}p_{60}^{00} = \exp \left( - (0.0279 + 0.0229) \times 10 \right) = e^{-0.508} = 0.601697772
+\end{gather*}
+
+For the situation (b), this is
+\begin{align*}
+_{10}p_{60}^{00} 
+&= \exp \left( - \int_{60}^{70} a_1 + b_1 e^{c_1 s} + a_2 + b_2 e^{c_2 s} ds \right) \\
+&= \exp \left( - 10 (a_1 + a_2) - \frac{b_1}{c_1} \left( e^{70c_1} - e^{60c_1} \right) - \frac{b_2}{c_2} \left( e^{70c_2} - e^{60c^2} \right) \right)
+\\
+&= e^{-0.009 - 0.29785603 - 0.231079427} = 0.583952604
+\end{align*}
+
+Similarly we cannot return to state 1 once we have left it, and the only transitions out of state 1 are to state 2, so
+\begin{gather*}
+_tp_x^{11} = \hspace{0mm}_tp_x^{\overline{11}} = \exp \left( - \int_0^t \mu_{x+s}^{12} ds \right)
+\end{gather*}
+For state 2, there is no leaving so $_tp_x^{22} = 1$. Also,
+\begin{gather*}
+_tp_x^{10} = \hspace{0mm}_tp_x^{20} = \hspace{0mm}_tp_x^{21} = 0
+\end{gather*}
+For the other transitions between states, Kolmogorov forward equations are
+\begin{gather*}
+\frac{d}{dt} \hspace{1mm}_tp_x^{01} 
+= \hspace{0mm}_tp_x^{00} \mu_{x+t}^{01}
+- \hspace{1mm}_tp_x^{01} \mu_{x+t}^{12}
+\end{gather*}
+\begin{gather*}
+\frac{d}{dt} \hspace{1mm}_tp_x^{02}
+= \hspace{0mm}_tp_x^{00} \mu_{x+t}^{02}
++ \hspace{0mm}_tp_x^{01} \mu_{x+t}^{12}
+\end{gather*}
+\begin{gather*}
+\frac{d}{dt} \hspace{1mm}_tp_x^{12}
+= \hspace{0mm}_tp_x^{11} \mu_{x+t}^{12}
+\end{gather*}
+
+A ``continuous sojourn annuity" is an annuity payable for the duration of a single stay in a given state. The EPV of a continuous payment of 1 per year paid to a life currently aged $x$ and currently in State $i$, where the payment continues as long as the life remains in State $i$, or until the expiry of the $n$ year term if earlier, is
+\begin{gather*}
+\overline{a}_{x:n}^{\overline{ii}} = \int_0^n e^{-\delta t} \hspace{1mm}_tp_x^{\overline{ii}} dt
+\end{gather*}
+
+We assume that premiums are calculated using the equivalence principle and that lives are in State 0 at the policy inception date. 
+
 \textbf{$n$ regular exercises, $m$ excel based exercises}
+
+\textbf{ALTAM Chapter 9 Multiple Decrement Models} \\
+\textbf{9.1 Summary} \\
+\textbf{9.2 Examples of multiple decrement models} \\
+\textbf{9.3 Actuarial functions for multiple decrement models} \\
+\textbf{9.4 Multiple decrement tables} \\
+\textbf{9.5 Constructing a multiple decrement table} \\
+\textbf{9.6 Comments on multiple decrement notation} \\
+\textbf{9.7 Transitions at exact ages}
+
+A multiple decrement model with $m+1$ states is characterised by having a single initial state, and $m$ exit states. We generically refer to the initial state as the active state or State 0. The process makes at most one transition, into one of the exit states. There are no further transitions, so all the exit states are absorbing states, and all the probabilities are of the form $\hspace{0mm}_tp_x^{0j}$ for $j = 0, 1, \dots, m$. We refer to modes of exit as decrements. 
+
+\textbf{$9$ regular exercises, $5$ excel based exercises}
+
+\textbf{$m$ regular exercises, $n$ excel based exercises}
+
+\textbf{FAM Syllabus (brief)}
+
+\textbf{ALTAM Chapter 1 Introduction to Life and Long-Term Health Insurance} (33 pages) \\
+\textbf{ALTAM Chapter 2 Survival Models} (24 pages) \\
+\textbf{ALTAM Chapter 3 Life Tables and Selection} (except sections 4, 10, 11, 12) (46 pages) \\
+\textbf{ALTAM Chapter 4 Insurance Benefits} (37 pages) \\
+\textbf{ALTAM Chapter 5 Annuities} (38 pages) \\
+\textbf{ALTAM Chapter 6 Premium Calculation} (39 pages) \\
+\textbf{ALTAM Chapter 7 Policy Values} (sections 1-3 except 2.4, 2.5 plus sections 7, 8) (68 pages) \\
+\textbf{ALTAM Chapter 16 Option Pricing}
+
+\textbf{ALTAM Syllabus (brief)}
+
+\textbf{ALTAM Chapter 3 Life Tables and Selection} (sections 4 and 10) (46 pages) \\
+\textbf{ALTAM Chapter 7 Policy Values} (sections 2.4 and 4) (68 pages)
+\textbf{ALTAM Chapter 8 Multiple State Models} (73 pages) \\
+\textbf{ALTAM Chapter 9 Multiple Decrement Models} (29 pages) \\
+\textbf{ALTAM Chapter 10 Joint Life and Last Survivor Benefits} (35 pages) \\
+\textbf{ALTAM Chapter 11 Pension Mathematics} (except section 12) (58 pages) \\
+\textbf{ALTAM Chapter 13 Emerging Costs for Traditional Life Insurance} (except section 8) \\
+\textbf{ALTAM Chapter 14 Universal Life Insurance} \\
+\textbf{ALTAM Chapter 15 Emerging Costs for Equity-Linked Insurance} (sections 1-3) \\
+\textbf{ALTAM Chapter 17 Embedded Options} \\
+\textbf{ALTAM Chapter 18 Estimating Survival Models} (sections 5 and 6 note sections 1-3 are background only)
+
+\textbf{FAM Syllabus (detailed)}
+
+\textbf{ALTAM Syllabus (detailed)}
+
+\textbf{ALTAM Chapter 3 Life Tables and Selection} (sections 4 and 10) \\
+\textbf{ALTAM Chapter 7 Policy Values} (sections 2.4 and 4)
+
+\textbf{ALTAM Chapter 8 Multiple State Models} (73 pages) \\
+\textbf{8.1 Summary} \\
+\textbf{8.2 Examples of multiple state models} \\
+\textbf{8.3 Assumptions and notation} \\
+\textbf{8.4 Formulae for probabilities} \\
+\textbf{8.5 Numerical evaluation of probabilities} \\
+\textbf{8.6 State-dependent insurance and annuity functions} \\
+\textbf{8.7 Premiums} \\
+\textbf{8.8 Policy values} \\
+\textbf{8.9 Applications of multiple state models in long-term health and disability insurance} \\
+\textbf{8.10 Markov multiple state models in discrete time} \\
+\textbf{$20$ regular exercises, $4$ excel based exercises}
+
+\textbf{ALTAM Chapter 9 Multiple Decrement Models} (29 pages) \\
+\textbf{9.1 Summary} \\
+\textbf{9.2 Examples of multiple decrement models} \\
+\textbf{9.3 Actuarial functions for multiple decrement models} \\
+\textbf{9.4 Multiple decrement tables} \\
+\textbf{9.5 Constructing a multiple decrement table} \\
+\textbf{9.6 Comments on multiple decrement notation} \\
+\textbf{9.7 Transitions at exact ages} \\
+\textbf{$m$ regular exercises, $n$ excel based exercises} \\
+\textbf{$9$ regular exercises, $5$ excel based exercises}
+
+\textbf{ALTAM Chapter 10 Joint Life and Last Survivor Benefits} (35 pages) \\
+\textbf{10.1 Summary} \\
+\textbf{10.2 Joint life and last survivor benefits} \\
+\textbf{10.3 Joint life notation} \\
+\textbf{10.4 Independent future lifetimes} \\
+\textbf{10.5 A multiple state model for independent future lifetimes} \\
+\textbf{10.6 A model with dependent future lifetimes} \\
+\textbf{10.7 The common shock model} \\
+\textbf{$16$ regular exercises, $5$ excel based exercises}
+
+\textbf{ALTAM Chapter 11 Pension Mathematics} (except section 12) (58 pages) \\
+\textbf{11.1 Summary} \\
+\textbf{11.2 Introduction} \\
+\textbf{11.3 The salary scale function} \\
+\textbf{11.4 Setting the contribution for a DC plan} \\
+\textbf{11.5 The service table} \\
+\textbf{11.6 Valuation of final salary plans} \\
+\textbf{11.7 Valuing career average earnings plans} \\
+\textbf{11.8 Funding the benefits} \\
+\textbf{11.9 Projected Unit Credit funding} \\
+\textbf{11.10 Traditional Unit Credit funding} \\
+\textbf{11.11 Comparing PUC and TUC funding methods} \\
+\textbf{11.12 Retiree health benefits} (skip) \\
+\textbf{$16$ regular exercises, $4$ excel based exercises}
+
+\textbf{ALTAM Chapter 13 Emerging Costs for Traditional Life Insurance} (except section 8) (39 pages) \\
+\textbf{ALTAM Chapter 14 Universal Life Insurance} (26 pages) \\
+\textbf{ALTAM Chapter 15 Emerging Costs for Equity-Linked Insurance} (sections 1-3) (29 pages) \\
+\textbf{ALTAM Chapter 17 Embedded Options} (31 pages) \\
+\textbf{ALTAM Chapter 18 Estimating Survival Models} (sections 5 and 6 note sections 1-3 are background only) (36 pages)
 
 \end{document}
