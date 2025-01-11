@@ -21,6 +21,7 @@
 \DeclareMathOperator{\Var}{Var}
 
 \usepackage{amsthm}
+\usepackage{braket}
 
 \newtheoremstyle{mydefstyle}
     {6pt}
@@ -1328,10 +1329,12 @@ Similarly we cannot return to state 1 once we have left it, and the only transit
 \begin{gather*}
 _tp_x^{11} = \hspace{0mm}_tp_x^{\overline{11}} = \exp \left( - \int_0^t \mu_{x+s}^{12} ds \right)
 \end{gather*}
+
 For state 2, there is no leaving so $_tp_x^{22} = 1$. Also,
 \begin{gather*}
 _tp_x^{10} = \hspace{0mm}_tp_x^{20} = \hspace{0mm}_tp_x^{21} = 0
 \end{gather*}
+
 For the other transitions between states, Kolmogorov forward equations are
 \begin{gather*}
 \frac{d}{dt} \hspace{1mm}_tp_x^{01} 
@@ -1346,6 +1349,68 @@ For the other transitions between states, Kolmogorov forward equations are
 \begin{gather*}
 \frac{d}{dt} \hspace{1mm}_tp_x^{12}
 = \hspace{0mm}_tp_x^{11} \mu_{x+t}^{12}
+\end{gather*}
+
+The first equation can be solved using an integrating factor,
+\begin{align*}
+\frac{d}{dt} \left( \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) \hspace{1mm}_tp_x^{01} \right)
+&= \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) \frac{d}{dt} \hspace{1mm}_tp_x^{01}
++ \exp \left( \int_0^t \mu_{x+s}^{12} ds \right) \mu_{x+t}^{12} \hspace{1mm}_tp_x^{01} \\
+&= \hspace{1mm}_tp_x^{00} \mu_{x+t}^{01} \exp \left( \int_0^t \mu_{x+s}^{12} ds \right)
+\end{align*}
+and since $_0p_x^{01} = 0$, 
+\begin{gather*}
+\exp \left( \int_0^t \mu_{x+s}^{12} ds \right) \hspace{1mm}_tp_x^{01}
+= \int_0^t \hspace{1mm}_rp_x^{00} \mu_{x+r}^{01} \exp \left( \int_0^r \mu_{x+s}^{12} ds \right) dr
+\end{gather*}
+\begin{gather*}
+\hspace{0mm}_tp_x^{01}
+= \int_0^t \hspace{1mm}_rp_x^{00} \mu_{x+r}^{01} \exp \left( - \int_r^t \mu_{x+s}^{12} ds \right) dr
+= \int_0^t \hspace{1mm}_rp_x^{\overline{00}} \mu_{x+r}^{01} \hspace{1mm}_tp_{x+r}^{\overline{11}} dr
+\end{gather*}
+We have re-derived an earlier formula.
+
+For the situation in (a), this is
+\begin{gather*}
+\hspace{0mm}_tp_x^{01}
+= \int_0^t e^{-(\mu_x^{01} + \mu_x^{02})r} \mu_x^{01} e^{-\mu_x^{12}(t-r)} dr
+= \mu_x^{01} e^{-\mu_x^{12} t} \int_0^t e^{-\mu_x^{01} r} dr
+= e^{-\mu_x^{12} t} \left( 1 - e^{-\mu_x^{01} t} \right)
+\end{gather*}
+In particular,
+\begin{gather*}
+_{10}p_{60}^{01} = e^{-0.229} \left(1 - e^{-0.279} \right) = 0.193630762
+\end{gather*}
+
+For the situation in (b), this is
+\begin{gather*}
+\hspace{0mm}_tp_x^{01}
+= \int_0^t 
+\exp \left( - \int_x^r a_1 + b_1 e^{c_1 s} + a_2 + b_2 e^{c_2 s} ds \right)
+\left(a_1 + b_1 e^{c_1(x+r)} \right)
+\exp \left( - \int_r^t a_2 + b_2 e^{c_2 (x+s) } ds \right) dr
+\end{gather*}
+
+Insurance benefits are conditional on making a transition into a specified state. For example, a death benefit is payable on transition into the dead state; a permanent disability insurance policy might pay a sum insured on becoming disabled.
+
+Suppose a payment of 1 is made immediately on each future transfer into state $j$ within $n$ years, given that the life is currently in state $i$ (which may be equal to $j$). Then the EPV of the benefit is
+\begin{gather*}
+\overline{A}_{x:n}^{ij} = \int_0^n \sum_{k \ne j} e^{-\delta t} \hspace{1mm}_tp_x^{ik} \mu_{x+t}^{kj} dt
+\end{gather*}
+Note that this benefit does not require the transition to be directly from state $i$ to state $j$, and if there is a possibility of multiple transitions into state $j$, then it values a benefit of 1 paid each time the life transitions into state $j$. If there is no definite term to the policy, then we have the whole life function $\overline{A}_x^{ij}$. 
+
+If we need to calculate $\overline{A}_{x:n}^{ij}$ form a set of tables of $\overline{A}_x^{ij}$, we can do so provided that we know probabilities $_np_x^{ij}$. The relationship is
+\begin{gather*}
+\overline{A}_{x:n}^{ij} = \overline{A}_x^{ij} - e^{-\delta n} \sum_k \hspace{1mm}_np_x^{ik} \overline{A}_{x+n}^{kj}
+\end{gather*}
+
+\color{red}
+\textbf{I don't understand equation 8.20 in the textbook - look into it again}
+\color{black}
+
+We have assume above that the benefit payable on transition from state $i$ to state $j$ is one. Suppose instead that the benefit on any transition to state $j$ is $B_t^{(j)}$ in the next $n$ years. Then the EPV of this new benefit would be
+\begin{gather*}
+\int_0^n \sum_{k \ne j} B_t^{(j)} e^{-\delta t} \hspace{1mm}_tp_x^{ik} \mu_{x+t}^{kj} dt
 \end{gather*}
 
 A ``continuous sojourn annuity" is an annuity payable for the duration of a single stay in a given state. The EPV of a continuous payment of 1 per year paid to a life currently aged $x$ and currently in State $i$, where the payment continues as long as the life remains in State $i$, or until the expiry of the $n$ year term if earlier, is
@@ -1370,6 +1435,100 @@ A multiple decrement model with $m+1$ states is characterised by having a single
 
 \textbf{$9$ regular exercises, $5$ excel based exercises}
 
+\textbf{ALTAM Chapter 11 Pension Mathematics} (except section 12) (58 pages) \\
+\textbf{11.1 Summary} \\
+\textbf{11.2 Introduction} \\
+\textbf{11.3 The salary scale function} \\
+\textbf{11.4 Setting the contribution for a DC plan} \\
+\textbf{11.5 The service table} \\
+\textbf{11.6 Valuation of final salary plans} \\
+\textbf{11.7 Valuing career average earnings plans} \\
+\textbf{11.8 Funding the benefits} \\
+\textbf{11.9 Projected Unit Credit funding} \\
+\textbf{11.10 Traditional Unit Credit funding} \\
+\textbf{11.11 Comparing PUC and TUC funding methods} \\
+\textbf{11.12 Retiree health benefits} (skip) \\
+\textbf{$16$ regular exercises, $4$ excel based exercises}
+
+Two major categories of employer sponsored pension plans are defined contribution and defined benefit.
+
+The defined contribution pension plan specifies how much the employer will contribute, as a percentage of salary, into a plan. The contributions are invested, and the accumulated funds are available to the employee when he or she leaves the company. The contributions may be set to meet a target benefit level, but the actual retirement income may be well below or above the target, depending on the investment experience.
+
+The defined benefit plan specifies a level of benefit, usually in relation to salary near retirement or to salary throughout employment. The contributions from the employer and possibly employee are accumulated to meet the benefit. If the investment or demographic experience is adverse, the contributions can be increased; if the experience is favourable, the contributions may be reduced. The pension plan actuary monitors the plan funding on a regular basis to assess whether the contributions need to be changed. 
+
+The benefit under a DB plan, and the target under a DC plan, are set by consideration of an appropriate ``replacement ratio" or ``replacement rate"
+\begin{gather*}
+R = \frac{\mbox{pension income in the year after retirement}}{\mbox{salary in the year before retirement}}
+\end{gather*}
+where we assume the plan member survives the year following retirement. 
+
+The contributions and benefits for most employer sponsored pension plans are related to salaries, so we need to model the progression of salaries through an individual's employment. We use a deterministic model. The rate of salary function $\{\overline{s}_y\}_{y \ge x_0}$ is such that $\overline{s}_y / \overline{s}_x$ is the ratio of the annual rate of salary at age $y$ to the annual rate of salary at age $x$ for any $x, y \ge x_0$. The value of $\overline{s}_{x_0}$ can be set arbitrarily to any positive number. 
+
+\textbf{Example 11.1} Consider an employee aged 30 whose current annual salary rate is \$30,000 and assume she will still be employed at exact age 41. 
+\begin{enumerate}[label = (\alph*)]
+\item Suppose the employee's rate of salary function $\{\overline{s}_y\}_{y \ge 20}$ is given by
+\begin{gather*}
+\overline{s}_y = 1.04^{y-20}
+\end{gather*}
+\begin{enumerate}[label=(\roman*)]
+\item Calculate her annual rate of salary at exact age 30.5
+\item Calculate her salary for the year of age 30 to 31
+\item Calculate her annual rate of salary at exact age 40.5
+\item Calculate her salary for the year of age 40 to 41
+\end{enumerate}
+\item Now suppose that each year the rate of salary increases by 4\% three months after an employee's birthday and then remains constant for a year. Repeat the above calculations.
+\end{enumerate}
+
+\textbf{Solution 11.1} For the situation in part (a),
+\begin{gather*}
+\mbox{salary rate at age 30.5} 
+= \frac{\overline{s}_{30.5}}{\overline{s}_{30}} \times 30,000
+= 1.04^{0.5} \times 30,000 = 30594.1170816
+\end{gather*}
+\begin{gather*}
+y = a^x \quad\Rightarrow\quad \log y = x \log a \quad\Rightarrow\quad \frac{1}{y} \frac{dy}{dx} = \log a
+\quad\Rightarrow\quad \frac{dy}{dx} = a^x \log a \quad\Rightarrow\quad \int_r^s a^x dx = \frac{1}{\log a} \left( a^s - a^r \right)
+\end{gather*}
+\begin{gather*}
+\mbox{salary for the year between 30 to 31} = \frac{1.04 - 1}{\log 1.04} \times 30,000
+= 30596.0780292
+\end{gather*}
+\begin{gather*}
+\mbox{salary rate at age 40.5} 
+= \frac{\overline{s}_{40.5}}{\overline{s}_{30}} \times 30,000
+= 1.04^{10.5} \times 30,000 = 45286.7669621
+\end{gather*}
+\begin{gather*}
+\mbox{salary for the year between 40 to 41} = \frac{1.04^{11} - 1.04^{10}}{\log 1.04} \times 30,000
+= 45289.6696437
+\end{gather*}
+
+For the situation in part (b),
+\begin{gather*}
+\mbox{salary rate at age 30.5} = 1.04 \times 30,000 = 31200
+\end{gather*}
+\begin{gather*}
+\mbox{salary for the year between 30 to 31} = 0.25 \times 30,000 + 0.75 \times 31200 = 30900
+\end{gather*}
+\begin{gather*}
+\mbox{salary rate at age 40.5} = 1.04^{11} \times 30,000 = 46183.6216895
+\end{gather*}
+\begin{gather*}
+\mbox{salary for the year between 40 to 41} = 0.25 \times 1.04^{10} \times 30,000 + 0.75 \times 1.04^{11} \times 30,000
+= 45739.548404
+\end{gather*}
+
+\color{red}
+\textbf{My answers for (b)(iii) and (b)(iv) disagree with the textbook's. I think they are wrong.}
+\color{black}
+
+In practice it is common to model the progression of salaries using a salary scale $\{s_y\}_{y \ge x_0}$ where the value $s_{x_0}$ can be set arbitrarily as any positive number, and for $x, y \ge x_0$,
+\begin{gather*}
+\frac{s_y}{s_x} = \frac{\mbox{salary received in year of age $y$ to $y+1$}}{\mbox{salary received in year of age $x$ to $x+1$}}
+= \frac{\int_0^1 \overline{s}_{y+t} dt}{\int_0^1 \overline{s}_{x+t} dt}
+\end{gather*}
+where we assume the individual remains in employment throughout the period from age $x$ to age $y+1$. 
+
 \textbf{$m$ regular exercises, $n$ excel based exercises}
 
 \textbf{FAM Syllabus (brief)}
@@ -1391,11 +1550,11 @@ A multiple decrement model with $m+1$ states is characterised by having a single
 \textbf{ALTAM Chapter 9 Multiple Decrement Models} (29 pages) \\
 \textbf{ALTAM Chapter 10 Joint Life and Last Survivor Benefits} (35 pages) \\
 \textbf{ALTAM Chapter 11 Pension Mathematics} (except section 12) (58 pages) \\
-\textbf{ALTAM Chapter 13 Emerging Costs for Traditional Life Insurance} (except section 8) \\
-\textbf{ALTAM Chapter 14 Universal Life Insurance} \\
-\textbf{ALTAM Chapter 15 Emerging Costs for Equity-Linked Insurance} (sections 1-3) \\
-\textbf{ALTAM Chapter 17 Embedded Options} \\
-\textbf{ALTAM Chapter 18 Estimating Survival Models} (sections 5 and 6 note sections 1-3 are background only)
+\textbf{ALTAM Chapter 13 Emerging Costs for Traditional Life Insurance} (except section 8) (39 pages) \\
+\textbf{ALTAM Chapter 14 Universal Life Insurance} (26 pages) \\
+\textbf{ALTAM Chapter 15 Emerging Costs for Equity-Linked Insurance} (sections 1-3) (29 pages) \\
+\textbf{ALTAM Chapter 17 Embedded Options} (31 pages) \\
+\textbf{ALTAM Chapter 18 Estimating Survival Models} (sections 5 and 6 note sections 1-3 are background only) (36 pages)
 
 \textbf{FAM Syllabus (detailed)}
 
@@ -1454,9 +1613,93 @@ A multiple decrement model with $m+1$ states is characterised by having a single
 \textbf{$16$ regular exercises, $4$ excel based exercises}
 
 \textbf{ALTAM Chapter 13 Emerging Costs for Traditional Life Insurance} (except section 8) (39 pages) \\
+
 \textbf{ALTAM Chapter 14 Universal Life Insurance} (26 pages) \\
+
 \textbf{ALTAM Chapter 15 Emerging Costs for Equity-Linked Insurance} (sections 1-3) (29 pages) \\
+
 \textbf{ALTAM Chapter 17 Embedded Options} (31 pages) \\
-\textbf{ALTAM Chapter 18 Estimating Survival Models} (sections 5 and 6 note sections 1-3 are background only) (36 pages)
+
+\textbf{ALTAM Chapter 18 Estimating Survival Models} (sections 5 and 6 note sections 1-3 are background only) (36 pages) \\
+\textbf{18.1 Summary} \\
+\textbf{18.2 Introduction} \\
+\textbf{18.3 Actuarial lifetime data} \\
+\textbf{18.4 Non-parametric survival function estimation} (omitted) \\
+\textbf{18.5 The alive-dead model} \\
+\textbf{18.6 Estimation of transition intensities in multiple state models} 
+
+\textbf{10th January 2025, Friday, 3.38pm at the 7th floor of the National Library at Bugis}
+
+\textbf{Theorem 4.3.2} (Jensen's inequality) Let $X$ be an integrable random variable with values in $I$ and let $c : I \to \mathbb{R}$ be convex. Then $\mathbb{E}(c(X))$ is well defined and
+\begin{gather*}
+\mathbb{E}(c(X)) \ge c(\mathbb{E}(X))
+\end{gather*}
+
+\textbf{Theorem 4.4.1} (H{\"o}lder's inequality) Let $p, q \in (1, \infty)$ be conjugate indices. Then for all measurable functions $f$ and $g$, we have
+\begin{gather*}
+\mu(\abs{fg}) \le \norm{f}_p \norm{g}_q
+\end{gather*}
+
+\textbf{Theorem 4.4.2} (Minkowski's inequality) For $p \in [1, \infty)$ and measurable functions $f$ and $g$, we have
+\begin{gather*}
+\norm{f + g}_p \le \norm{f}_p + \norm{g}_p
+\end{gather*}
+
+\textbf{Theorem 4.5.1} Let $\mathcal{A}$ be a $\pi$-system on $E$ generating $\mathcal{e}$ with $\mu(A) < \infty$ for all $A \in \mathcal{A}$, and such that $E_n \uparrow E$ for some $(E_n : n \in \mathbb{N})$ in $\mathcal{A}$. Define
+\begin{gather*}
+V_0 = \left\{ \sum_{k = 1}^n a_k 1_{A_k} : a_k \in \mathbb{R}, \hspace{1mm} A_k \in \mathcal{A}, \hspace{1mm} n \in \mathbb{N} \right\}
+\end{gather*}
+Let $p \in [1, \infty)$. Then $V_0 \subseteq L^p$. Moreover for all $f \in L^p$ and all $\epsilon > 0$ there exists $v \in V_0$ such that $\norm{v - f}_p \le \epsilon$. 
+
+\textbf{Theorem 5.1.1} (Completeness of $L^p$) Let $p \in [1, \infty]$. Let $(f_n : n \in \mathbb{N})$ be a sequence in $L^p$ such that
+\begin{gather*}
+\norm{f_n - f_m}_p \to 0 \quad\mbox{ as }\quad m, n \to \infty
+\end{gather*}
+Then there exists $f \in L^p$ such that
+\begin{gather*}
+\norm{f_n - f}_p \to 0 \quad\mbox{ as }\quad n \to \infty
+\end{gather*}
+
+\textbf{Theorem 5.2.1} (Orthogonal projection) Let $V$ be a closed subspace of $L^2$. Then each $f \in L^2$ has a decomposition $f = v + u$ with $v \in V$ and $u \in V^{\perp}$. Moreover $\norm{f - v}_2 \le \norm{f - g}_2$ for all $g \in V$, with equality only if $g = v$ a.e.
+
+\textbf{Theorem 6.1.1} (Bounded convergence) Let $(X_n : n \in \mathbb{N})$ be a sequence of random variables with $X_n \to X$ in probability and $\abs{X_n} \le C$ for all $n$, for some constant $C < \infty$. Then $X_n \to X$ in $L^1$. 
+
+\textbf{Theorem 6.2.3} Let $X$ be a random variable and let $(X_n : n \in \mathbb{N})$ be a sequence of random variables. The following are equivalent:
+\begin{enumerate}[label = (\alph*)]
+\item $X_n \in L^1$ for all $n$, $X \in L^1$ and $X_n \to X$ in $L^1$
+\item $\{X_n : n \in \mathbb{N}\}$ is UI and $X_n \to X$ in probability
+\end{enumerate}
+
+\textbf{Theorem 7.7.1} Let $X$ be a random variable in $\mathbb{R}^d$. Then the distribution $\mu_X$ of $X$ is uniquely determined by its characteristic function $\phi_X$. Moreover, in the case where $\phi_X$ is integrable, $\mu_X$ has a continuous bounded density function given by
+\begin{gather*}
+f_X(x) = \frac{1}{(2\pi)^d} \int_{\mathbb{R}^d} \phi_X(u) e^{-i\braket{u, x}} du
+\end{gather*}
+Moreover, if $(X_n : n \in \mathbb{N})$ is a sequence of random variables in $\mathbb{R}^d$ such that $\phi_{X_n}(u) \to \phi_X(u)$ as $n \to \infty$ for all $u \in \mathbb{R}^d$, then $X_n$ converges weakly to $X$. 
+
+\textbf{Theorem 10.2.2} (Strong law of large numbers) Let $(Y_n : n \in \mathbb{N})$ be a sequence of independent identically distributed integrable random variables with mean $\nu$. Set $S_n = Y_1 + \dots + Y_n$. Then
+\begin{gather*}
+S_n / n \to \nu \quad\mbox{ a.s. }\quad \mbox{ as $n \to \infty$ }
+\end{gather*}
+
+\textbf{Theorem 10.3.1} (Central limit theorem) Let $(X_n : n \in \mathbb{N})$ be a sequence of independent identically distributed random variables with mean 0 and variance 1. Set $S_n = X_1 + \dots + X_n$. Then for all $x \in \mathbb{R}$, as $n \to \infty$,
+\begin{gather*}
+\mathbb{P} \left( \frac{S_n}{\sqrt{n}} \le x \right) \to \frac{1}{\sqrt{2\pi}} \int_0^x e^{-\frac{y^2}{2}} dy
+\end{gather*}
+
+\textbf{Proposition} Let $M \in \mathcal{M}^2_c$ and $H \in \mathcal{E}$. Then $H \cdot M \in \mathcal{M}^2_c$ and 
+\begin{gather*}
+\norm{H \cdot M}_{\mathcal{M}^2} = \mathbb{E} \left( \int_0^{\infty} H_s^2 \hspace{1mm} d\braket{M}_s \right)
+\end{gather*}
+
+\textbf{Proposition} Let $M \in \mathcal{M}^2_c$ and $H \in \mathcal{E}$. Then
+\begin{gather*}
+\braket{H \cdot M, N} = H \cdot \braket{M, N} \qquad \forall \quad N \in \mathcal{M}^2_c
+\end{gather*}
+
+\textbf{Fact} $L^2(M)$ is a Hilbert space.
+
+\textbf{Proposition} Let $M \in \mathcal{M}^2_c$. Then $\mathcal{E}$ is dense in $L^2(M)$.
+
+
 
 \end{document}
