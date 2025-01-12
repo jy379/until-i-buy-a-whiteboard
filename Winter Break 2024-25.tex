@@ -22,6 +22,7 @@
 
 \usepackage{amsthm}
 \usepackage{braket}
+\usepackage{lscape}
 
 \newtheoremstyle{mydefstyle}
     {6pt}
@@ -1628,6 +1629,8 @@ where we assume the individual remains in employment throughout the period from 
 \textbf{18.5 The alive-dead model} \\
 \textbf{18.6 Estimation of transition intensities in multiple state models} 
 
+\newpage
+
 \textbf{10th January 2025, Friday, 3.38pm at the 7th floor of the National Library at Bugis}
 
 \textbf{Theorem 4.3.2} (Jensen's inequality) Let $X$ be an integrable random variable with values in $I$ and let $c : I \to \mathbb{R}$ be convex. Then $\mathbb{E}(c(X))$ is well defined and
@@ -1686,6 +1689,8 @@ S_n / n \to \nu \quad\mbox{ a.s. }\quad \mbox{ as $n \to \infty$ }
 \mathbb{P} \left( \frac{S_n}{\sqrt{n}} \le x \right) \to \frac{1}{\sqrt{2\pi}} \int_0^x e^{-\frac{y^2}{2}} dy
 \end{gather*}
 
+\textbf{Theorem 2.2.2} (Optional stopping theorem) Let $X$ be a supermartingale and let $S$ and $T$ be bounded stopping times with $S \le T$. Then $\mathbb{E}(X_T) \le \mathbb{E}(X_S)$. 
+
 \textbf{Proposition} Let $M \in \mathcal{M}^2_c$ and $H \in \mathcal{E}$. Then $H \cdot M \in \mathcal{M}^2_c$ and 
 \begin{gather*}
 \norm{H \cdot M}_{\mathcal{M}^2} = \mathbb{E} \left( \int_0^{\infty} H_s^2 \hspace{1mm} d\braket{M}_s \right)
@@ -1700,6 +1705,411 @@ S_n / n \to \nu \quad\mbox{ a.s. }\quad \mbox{ as $n \to \infty$ }
 
 \textbf{Proposition} Let $M \in \mathcal{M}^2_c$. Then $\mathcal{E}$ is dense in $L^2(M)$.
 
+\textbf{Proposition} Let $M \in \mathcal{M}^2_c$. Then
+\begin{enumerate}[label = (\roman*)]
+\item The map $H \in \mathcal{E} \mapsto H \cdot M \in \mathcal{M}^2_c$ extends uniquely to an isometry $L^2(M) \to \mathcal{M}^2_c$, the Ito isometry
+\item $H \cdot M$ is the unique martingale in $\mathcal{M}^2_c$ s.t.
+\begin{gather*}
+\braket{H \cdot M, N} = H \cdot \braket{M, N} \qquad \forall \quad N \in \mathcal{M}^2_c
+\end{gather*}
+\end{enumerate}
 
+\textbf{Theorem} Let $M$ be a continuous local martingale. For eery $H \in L^2_{loc}(m)$ there is a unique continuous local martingale $H \cdot M$ with $(H \cdot M)_0 = 0$ s.t.
+\begin{gather*}
+\braket{H \cdot M, N} = H \cdot \braket{M, N} \qquad \forall \quad N \mbox{ continuous local martingale }
+\end{gather*}
+If $M \in \mathcal{M}^2_c$ and $H \in L^2(M)$ then the definition of $H \cdot M$ is the same as previously.
+
+\textbf{Corollary} Let $X$ be a continuous semimartingale, and let $H$ be a locally bounded adapted left-continuous process. Then for any sequence of subdivisions $0 = t_0^{(m)} < \dots < t_{n_m}^{(m)} = t$ of $[0, t]$ with $\max_i \abs{t_i^{(m)} - t_{i-1}^{(m)}} \to 0$,
+\begin{gather*}
+\lim_{m \to \infty} \sum_{i = 1}^{n_m} H_{t{i-1}^{(m)}} \left( X_{t_i^{(m)}} - X_{t_{i-1}^{(m)}} \right) = \int_0^t H_s dX_s
+\end{gather*}
+uniformly on compact sets in probability. 
+
+Unlike the case that $X$ is of finite variation, it is here essential that $H$ is evaluated at the left endpoint of the interval $(t_{i-1}^{(m)}, t_i^{(m)}]$. The choice of the left endpoint gives the Ito integral. Choosing the average of the left and right endpoints gives the Stratonovich integral, which is generally not a martingale. 
+
+\textbf{Theorem} (Integration by parts) Let $X, Y$ be continuous semimartingales. Then a.s. for all $t$,
+\begin{gather*}
+X_t Y_t - X_0 Y_0 = \int_0^t X_s dY_s + \int_0^t Y_s dX_s + \braket{X, Y}_t
+\end{gather*}
+
+\textbf{Theorem} (Ito's formula) Let $X^1, \dots, X^p$ be continuous semimartingales, and let $f : \mathbb{R}^p \to \mathbb{R}$ be $C^2$. Then a.s.
+\begin{gather*}
+f(X_t) = f(X_0) + \sum_{i = 1}^p \int_0^t \frac{\partial f}{\partial X^i}(X_s) \hspace{1mm} dX^i_s + \frac{1}{2} \sum_{i, j = 1}^p \int_0^t \frac{\partial^2 f}{\partial X^i \partial X^j}(X_s) \hspace{1mm} d\braket{X^i, X^j}_s
+\end{gather*}
+
+\newpage
+
+Chin - Problems and Solutions in Mathematical Finance
+
+\begin{enumerate}
+
+\item General Probability Theory (47 questions)
+
+\begin{enumerate} 
+\item Probability spaces (13 questions)
+\item Discrete and continuous random variables (19 questions)
+\item Properties of expectations (15 questions)
+\end{enumerate}
+
+\item Wiener Process (39 questions)
+
+\begin{enumerate}
+\item Basic properties (13 questions)
+\item Markov property (3 questions)
+\item Martingale property (7 questions)
+\item First passage time (7 questions)
+\item Reflection principle (5 questions) 
+\item Quadratic variation (4 questions)
+\end{enumerate}
+
+\item Stochastic Differential Equations (53 questions)
+
+\begin{enumerate}
+\item Ito calculus (16 questions)
+\item One-dimensional diffusion process (24 questions)
+\item Multi-dimensional diffusion process (13 questions)
+\end{enumerate}
+
+\item Change of Measure (36 questions)
+
+\begin{enumerate} 
+\item Martingale representation theorem (2 questions)
+\item Girsanov's theorem (17 questions)
+\item Risk-neutral measure (17 questions)
+\end{enumerate}
+
+\item Poisson Process (47 questions)
+
+\begin{enumerate} 
+\item Properties of Poisson process (25 questions)
+\item Jump diffusion process (6 questions)
+\item Girsanov's theorem for jump processes (12 questions)
+\item Risk-neutral measure for jump processes (4 questions)
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+\begin{center}
+\textbf{QFIQF}
+\end{center}
+
+Fall 2020, 2021, 2022 and Spring 2021, 2022 have 15 questions each, total 100 points
+
+Spring 2023, 2024 have 11 questions each and Fall 2023 has 10 questions, total 70 points
+
+Total 107 past year questions to practice on so about 2.5 questions per day on average over 40 days
+
+\begin{center}
+\textbf{1. Stochastic calculus}
+\end{center}
+
+Hirsa \& Neftci - An Introduction to the Mathematics of Financial Derivatives - Chapters 1 to 15
+
+\textbf{01 Financial mathematics a brief introduction} \\
+\textbf{02 A primer on the arbitrage theorem} (9 questions, 20 pages) \\
+\textbf{03 Review of deterministic calculus} (12 questions, 21 pages) \\
+\textbf{04 Pricing derivatives models and notation} (4 questions, 10 pages) \\
+\textbf{05 Tools in probability theory} (6 questions, 22 pages) \\
+\textbf{06 Martingales and martingale representation} (7 questions, 24 pages) \\
+\textbf{07 Differentiation in stochastic environments} (3 questions, 12 pages) \\
+\textbf{08 Wiener process, Levy processes and rare events in financial markets} (4 questions, 22 pages) \\
+\textbf{09 Integration in stochastic environments} (10 questions, 18 pages) \\
+\textbf{10 Ito's lemma} (5 questions, 16 pages) \\
+
+\textbf{11 The dynamics of derivative prices} (6 questions, 18 pages) \\
+\textbf{12 Pricing derivative products - partial differential equations} (6 questions, 18 pages) \\
+\textbf{13 PDEs and PIDEs - an application} (5 questions, 15 pages) \\
+\textbf{14 Pricing derivative products - equivalent martingale measures} (5 questions, 22 pages) \\
+\textbf{15 Equivalent martingale measures} (4 questions, 16 pages) \\
+
+Chin - Chapters 1 to 5
+
+\textbf{1 General probability theory} (47 questions) \\
+\textbf{2 Wiener process} (39 questions) \\
+\textbf{3 Stochastic differential equations} (53 questions) \\
+\textbf{4 Change of measure} (36 questions) \\
+\textbf{5 Poisson process} (47 questions)
+
+\newpage
+
+\begin{center}
+\textbf{2. Interest rate models and hedging}
+\end{center}
+
+Hirsa \& Neftci - An Introduction to the Mathematics of Financial Derivatives  - Chapters 16 to 20
+
+\textbf{16 New results and tools for interest sensitive securities} (4 questions, 8 pages) \\
+\textbf{17 Arbitrage theorem in a new setting} (10 questions, 24 pages) \\
+\textbf{18 Modelling term structure and related concepts} (4 questions, 14 pages) \\
+\textbf{19 Classical and HJM approach to fixed income} (6 questions, 17 pages) \\
+\textbf{20 Classical PDE analysis for interest rate derivatives} (4 questions, 12 pages)
+
+Veronesi - Fixed Income Securities: Valuation, Risk and Risk Management - Chapters 14 to 21 minus 17 plus 22.1 to 22.4
+
+\textbf{14 Interest rate models in continuous time} \\
+\textbf{15 No arbitrage and the pricing of interest rate securities} \\
+\textbf{16 Dynamic hedging and relative value trades} \\
+\textbf{18 The risk and return of interest rate securities} \\
+\textbf{19 No arbitrage models and standard derivatives} \\
+\textbf{20 The market model and options volatility dynamics} \\
+\textbf{21 Forward risk neutral pricing and the LIBOR market model} \\
+\textbf{22 Multifactor models}
+
+\begin{center}
+\textbf{3. Equity option pricing and hedging}
+\end{center}
+
+Derman \& Miller - The Volatility Smile - Chapters 1 to 11, 14, and 17 to 19
+
+\textbf{01 Overview} \\
+\textbf{02 The principle of replication} (3 questions, 24 pages) \\
+\textbf{03 Static and dynamic replication} (7 questions, 19 pages) \\
+\textbf{04 Variance swaps - a lesson in replication} (6 questions, 28 pages) \\
+\textbf{05 The P\&L of hedged option strategies in a Black-Scholes-Merton world} (4 questions, 19 pages) \\
+\textbf{06 The effect of discrete hedging on P\&L} (3 questions, 12 pages) \\
+\textbf{07 ?!} \\
+\textbf{08 The smile - stylised facts and their interpretation} (6 questions, 22 pages) \\
+\textbf{09 No-arbitrage bounds on the smile} (3 questions, 10 pages) \\
+\textbf{10 A survey of smile models} (1 question, 11 pages) \\
+
+\textbf{11 Implied distributions and static replication} \\
+\textbf{14 Local volatility models} \\
+\textbf{17 Some final remarks on local volatility models} \\
+\textbf{18 Patterns of volatility change} \\
+\textbf{19 Introducing stochastic volatility models}
+
+\begin{center}
+\textbf{4. Applications}
+\end{center}
+
+Bunch of readings from SOA themselves
+
+\newpage
+
+\begin{center}
+\textbf{Week 1}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{20th January 2025}
+
+ALTAM Q1 \\
+QFIQF Fall 2020 Q1, 2, 3
+
+\textbf{Tuesday} \hfill \textbf{21st January 2025}
+
+ALTAM Q2, 3 \\
+QFIQF Fall 2020, Q4, 5, 6
+
+\textbf{Wednesday} \hfill \textbf{22nd January 2025}
+
+ALTAM Q4 \\
+QFIQF Fall 2020, Q7, 8, 9
+
+\textbf{Thursday} \hfill \textbf{23rd January 2025}
+
+ALTAM Q5, 6 \\
+QFIQF Fall 2020 Q10, 11, 12
+
+\textbf{Friday} \hfill \textbf{24th January 2025}
+
+ALTAM Q7 \\
+QFIQF Fall 2020 Q13, 14, 15
+
+\begin{center}
+\textbf{Week 2}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{27th January 2025}
+
+ALTAM Q8 \\
+QFIQF Spring 2021 Q1, 2, 3
+
+\textbf{Tuesday} \hfill \textbf{28th January 2025}
+
+ALTAM Q9, 10 \\
+QFIQF Spring 2021 Q4, 5, 6
+
+\textbf{Wednesday} \hfill \textbf{29th January 2025}
+
+ALTAM Q11 \\
+QFIQF Spring 2021 Q7, 8, 9
+
+\textbf{Thursday} \hfill \textbf{30th January 2025}
+
+ALTAM Q12, 13 \\
+QFIQF Spring 2021 Q10, 11, 12
+
+\textbf{Friday} \hfill \textbf{31st January 2025}
+
+ALTAM Q14 \\
+QFIQF Spring 2021 Q13, 14, 15
+
+\begin{center}
+\textbf{Week 3}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{3rd February 2025}
+
+REGISTRATION DAY (and also Emma's birthday and Greg says she wants sushi...)
+
+ALTAM Q15 \\
+QFIQF Fall 2021 Q1, 2, 3
+
+\textbf{Tuesday} \hfill \textbf{4th February 2025}
+
+ALTAM Q16, 17 \\
+QFIQF Fall 2021 Q4, 5, 6
+
+\textbf{Wednesday} \hfill \textbf{5th February 2025}
+
+ALTAM Q18 \\
+QFIQF Fall 2021 Q7, 8, 9
+
+\textbf{Thursday} \hfill \textbf{6th February 2025}
+
+ALTAM Q19, 20 \\
+QFIQF Fall 2021 Q10, 11, 12
+
+\textbf{Friday} \hfill \textbf{7th February 2025}
+
+ALTAM Q21 \\
+QFIQF Fall 2021 Q13, 14, 15
+
+\begin{center}
+\textbf{Week 4}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{10th February 2025}
+
+ALTAM Q22 \\
+QFIQF Spring 2022 Q1, 2, 3
+
+\textbf{Tuesday} \hfill \textbf{11th February 2025}
+
+ALTAM Q23, 24 \\
+QFIQF Spring 2022 Q4, 5, 6
+
+\textbf{Wednesday} \hfill \textbf{12th February 2025}
+
+ALTAM Q25 \\
+QFIQF Spring 2022 Q7, 8 ,9
+
+\textbf{Thursday} \hfill \textbf{13th February 2025}
+
+ALTAM Q26, 27 \\
+QFIQF Spring 2022 Q10, 11, 12
+
+\textbf{Friday} \hfill \textbf{14th February 2025}
+
+ALTAM Q28 \\
+QFIQF Spring 2022 Q13, 14, 15
+
+\begin{center}
+\textbf{Week 5}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{17th February 2025}
+
+ALTAM Q29 \\
+QFIQF Fall 2022 Q1, 2, 3
+
+\textbf{Tuesday} \hfill \textbf{18th February 2025}
+
+ALTAM Q30, 31 \\
+QFIQF Fall 2022 Q4, 5, 6
+
+\textbf{Wednesday} \hfill \textbf{19th February 2025}
+
+ALTAM Q32 \\
+QFIQF Fall 2022 Q7, 8, 9
+
+\textbf{Thursday} \hfill \textbf{20th February 2025}
+
+ALTAM Q33, 34 \\
+QFIQF Fall 2022 Q10, 11, 12
+
+\textbf{Friday} \hfill \textbf{21st February 2025}
+
+ALTAM Q35 \\
+QFIQF Fall 2022 Q13, 14, 15
+
+\begin{center}
+\textbf{Week 6}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{24th February 2025}
+
+ALTAM Q36 \\
+QFIQF Spring 2023 Q1, 2, 3
+
+\textbf{Tuesday} \hfill \textbf{25th February 2025}
+
+ALTAM Q37, 38 \\
+QFIQF Spring 2023 Q4, 5
+
+\textbf{Wednesday} \hfill \textbf{26th February 2025}
+
+ALTAM Q39 \\
+QFIQF Spring 2023 Q6, 7
+
+\textbf{Thursday} \hfill \textbf{27th February 2025}
+
+ALTAM Q40, 41 \\
+QFIQF Spring 2023 Q8, 9
+
+\textbf{Friday} \hfill \textbf{28th February 2025}
+
+AIM TO PRELIM ON THIS DAY
+
+ALTAM Q42 \\
+QFIQF Spring 2023 Q10, 11
+
+\begin{center}
+\textbf{Week 7}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{3rd March 2025}
+
+ALTAM Q43 \\
+QFIQF Fall 2023 Q1, 2
+
+\textbf{Tuesday} \hfill \textbf{4th March 2025}
+
+ALTAM Q44, 45 \\
+QFIQF Fall 2023 Q3, 4
+
+\textbf{Wednesday} \hfill \textbf{5th March 2025}
+
+ALTAM Q46 \\
+QFIQF Fall 2023 Q5, 6
+
+\textbf{Thursday} \hfill \textbf{6th March 2025}
+
+ALTAM Q47, 48 \\
+QFIQF Fall 2023 Q7, 8
+
+\textbf{Friday} \hfill \textbf{7th March 2025}
+
+ALTAM Q49 \\
+QFIQF Fall 2023 Q9, 10
+
+\begin{center}
+\textbf{Week 8}
+\end{center}
+
+\textbf{Monday} \hfill \textbf{10th March 2025}
+
+\textbf{Tuesday} \hfill \textbf{11th March 2025}
+
+FLYING BACK TO SINGAPORE TONIGHT 9.30PM
+
+\textbf{Wednesday} \hfill \textbf{12th March 2025}
+
+\textbf{Thursday} \hfill \textbf{13th March 2025}
+
+\textbf{Friday} \hfill \textbf{14th March 2025}
 
 \end{document}
