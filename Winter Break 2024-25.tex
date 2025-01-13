@@ -1546,7 +1546,7 @@ where we assume the individual remains in employment throughout the period from 
 \textbf{ALTAM Syllabus (brief)}
 
 \textbf{ALTAM Chapter 3 Life Tables and Selection} (sections 4 and 10) (46 pages) \\
-\textbf{ALTAM Chapter 7 Policy Values} (sections 2.4 and 4) (68 pages)
+\textbf{ALTAM Chapter 7 Policy Values} (sections 2.4 and 4) (68 pages) \\
 \textbf{ALTAM Chapter 8 Multiple State Models} (73 pages) \\
 \textbf{ALTAM Chapter 9 Multiple Decrement Models} (29 pages) \\
 \textbf{ALTAM Chapter 10 Joint Life and Last Survivor Benefits} (35 pages) \\
@@ -1628,6 +1628,79 @@ where we assume the individual remains in employment throughout the period from 
 \textbf{18.4 Non-parametric survival function estimation} (omitted) \\
 \textbf{18.5 The alive-dead model} \\
 \textbf{18.6 Estimation of transition intensities in multiple state models} 
+
+\newpage
+
+\begin{center}
+\textbf{ALTAM Chapter 8 Multiple State Models} (73 pages)
+\end{center}
+
+\textbf{8.1 Summary} \\
+\textbf{8.2 Examples of multiple state models} \\
+\textbf{8.3 Assumptions and notation} \\
+\textbf{8.4 Formulae for probabilities} \\
+\textbf{8.5 Numerical evaluation of probabilities} \\
+\textbf{8.6 State-dependent insurance and annuity functions} \\
+\textbf{8.7 Premiums} \\
+\textbf{8.8 Policy values} \\
+\textbf{8.9 Applications of multiple state models in long-term health and disability insurance} \\
+\textbf{8.10 Markov multiple state models in discrete time} \\
+\textbf{$20$ regular exercises, $4$ excel based exercises}
+
+Figure 8.1 The alive-dead model (pg 287)
+\begin{gather*}
+\mbox{state 0 (alive)} \quad\longrightarrow\quad \mbox{state 1 (dead)}
+\end{gather*}
+
+Figure 8.2 The accidental death model (pg 288)
+\begin{gather*}
+\mbox{state 2 (dead - other causes)} \quad \longleftarrow \quad \mbox{state 0 (alive)} \quad \longrightarrow \quad \mbox{state 1 (dead - accident)}
+\end{gather*}
+
+Figure 8.3 The permanent disability model (pg 289)
+\[\begin{tikzcd}{ccc}
+\mbox{state 0 (healthy)} \arrow{rr} \arrow{dr} & & \mbox{state 1 (disabled)} \arrow{dl} \\
+& \mbox{state 2 (dead)} &
+\end{tikzcd}\]
+
+Figure 8.4 The sickness-death model for disability income insurance (pg 290)
+\[\begin{tikzcd}{ccc}
+\mbox{state 0 (healthy)} \arrow{rr} \arrow{dr} & & \mbox{state 1 (disabled)} \arrow{ll} \arrow{dl} \\
+& \mbox{state 2 (dead)} &
+\end{tikzcd}\]
+
+\textbf{Assumption 8.1 (Markov property)} For any states $i, j$ and times $t, t + s$, the conditional probability
+\begin{gather*}
+\mathbb{P}(Y(t + s) = j \vert Y(t) = i)
+\end{gather*}
+is well-defined, i.e. its value does not depend on any information about the process before time $t$.
+
+\textbf{Assumption 8.2} For any positive interval of time $h$, 
+\begin{gather*}
+\mathbb{P}(\mbox{2 or more transitions within a time period of length $h$}) = o(h)
+\end{gather*}
+
+\textbf{Notation} For states $i$ and $j$ in a multiple state model and for $x, t \ge 0$, we define
+\begin{gather*}
+\hspace{0mm}_tp_x^{ij} = \mathbb{P}(Y(x+t) = j \vert Y(x) = i), \qquad
+\hspace{0mm}_tp_x^{\overline{ii}} = \mathbb{P}(Y(x+s) = i \mbox{ for all } s\in [0, t] \vert Y(x) = i)
+\end{gather*}
+The \textbf{force of transition} or \textbf{transition intensity} between states $i$ and $j$ at age $x$ is
+\begin{gather*}
+\mu_x^{ij} = \lim_{h \to 0^+} \frac{\hspace{0mm}_hp_x^{ij}}{h} \quad\mbox{ for }\quad i \ne j
+\end{gather*}
+
+\textbf{Assumption 8.3} For all states $i$ and $j$ and all ages $x \ge 0$, we assume that $\hspace{0mm}_tp_x^{ij}$ is a differentiable function of $t$.
+
+For any state $i$ in a multiple state model satisfying assumptions 8.1 to 8.3,
+\begin{gather*}
+\hspace{0mm}_tp_x^{\overline{ii}} = \exp \left( - \int_0^t \sum_{j \ne i} \mu_{x+s}^{ij} ds \right) \tag{8.9}
+\end{gather*}
+
+\textbf{8.4.1 Kolmogorov's forward equations} (pg 300)
+\begin{gather*}
+\frac{d}{dt} \hspace{0mm}_tp_x^{ij} = \sum_{k \ne j} \left( \hspace{1mm}_tp_x^{ik} \mu_{x+t}^{kj} - \hspace{1mm}_tp_x^{ij} \mu_{x+t}^{jk} \right) \tag{8.16}
+\end{gather*}
 
 \newpage
 
@@ -1808,7 +1881,7 @@ Total 107 past year questions to practice on so about 2.5 questions per day on a
 
 Hirsa \& Neftci - An Introduction to the Mathematics of Financial Derivatives - Chapters 1 to 15
 
-\textbf{01 Financial mathematics a brief introduction} \\
+\textbf{01 Financial mathematics a brief introduction} (6 questions, 11 pages) \\
 \textbf{02 A primer on the arbitrage theorem} (9 questions, 20 pages) \\
 \textbf{03 Review of deterministic calculus} (12 questions, 21 pages) \\
 \textbf{04 Pricing derivatives models and notation} (4 questions, 10 pages) \\
@@ -1849,14 +1922,14 @@ Hirsa \& Neftci - An Introduction to the Mathematics of Financial Derivatives  -
 
 Veronesi - Fixed Income Securities: Valuation, Risk and Risk Management - Chapters 14 to 21 minus 17 plus 22.1 to 22.4
 
-\textbf{14 Interest rate models in continuous time} \\
-\textbf{15 No arbitrage and the pricing of interest rate securities} \\
-\textbf{16 Dynamic hedging and relative value trades} \\
-\textbf{18 The risk and return of interest rate securities} \\
-\textbf{19 No arbitrage models and standard derivatives} \\
-\textbf{20 The market model and options volatility dynamics} \\
-\textbf{21 Forward risk neutral pricing and the LIBOR market model} \\
-\textbf{22 Multifactor models}
+\textbf{14 Interest rate models in continuous time} (8 questions, 32 pages) \\
+\textbf{15 No arbitrage and the pricing of interest rate securities} (13 questions, 32 pages) \\
+\textbf{16 Dynamic hedging and relative value trades} (7 questions, 30 pages) \\
+\textbf{18 The risk and return of interest rate securities} (5 questions, 24 pages) \\
+\textbf{19 No arbitrage models and standard derivatives} (5 questions, 34 pages) \\
+\textbf{20 The market model and options volatility dynamics} (6 questions, 22 pages) \\
+\textbf{21 Forward risk neutral pricing and the LIBOR market model} (9 questions, 38 pages) \\
+\textbf{22 Multifactor models} (6 questions, 44 pages) 
 
 \begin{center}
 \textbf{3. Equity option pricing and hedging}
@@ -1870,16 +1943,16 @@ Derman \& Miller - The Volatility Smile - Chapters 1 to 11, 14, and 17 to 19
 \textbf{04 Variance swaps - a lesson in replication} (6 questions, 28 pages) \\
 \textbf{05 The P\&L of hedged option strategies in a Black-Scholes-Merton world} (4 questions, 19 pages) \\
 \textbf{06 The effect of discrete hedging on P\&L} (3 questions, 12 pages) \\
-\textbf{07 ?!} \\
+\textbf{07 The effect of transaction costs on P\&L} (3 questions, 13 pages) \\
 \textbf{08 The smile - stylised facts and their interpretation} (6 questions, 22 pages) \\
 \textbf{09 No-arbitrage bounds on the smile} (3 questions, 10 pages) \\
 \textbf{10 A survey of smile models} (1 question, 11 pages) \\
 
-\textbf{11 Implied distributions and static replication} \\
-\textbf{14 Local volatility models} \\
-\textbf{17 Some final remarks on local volatility models} \\
-\textbf{18 Patterns of volatility change} \\
-\textbf{19 Introducing stochastic volatility models}
+\textbf{11 Implied distributions and static replication} (4 questions, 27 pages) \\
+\textbf{14 Local volatility models} (4 questions, 16 pages) \\
+\textbf{17 Some final remarks on local volatility models} (0 questions, 6 pages) \\
+\textbf{18 Patterns of volatility change} (3 questions, 9 pages) \\
+\textbf{19 Introducing stochastic volatility models} (4 questions, 17 pages)
 
 \begin{center}
 \textbf{4. Applications}
