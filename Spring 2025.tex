@@ -1,0 +1,689 @@
+\documentclass[hidelinks, 12pt]{article} 
+\usepackage{geometry}   \geometry{letterpaper}  
+\usepackage{color}
+
+\usepackage[parfill]{parskip}   
+\usepackage{graphicx}	
+	
+\addtolength{\oddsidemargin}{-0.8in}
+\addtolength{\evensidemargin}{-0.8in}
+\addtolength{\textwidth}{1.6in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1in}	
+	
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{commath}
+
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\Var}{Var}
+
+\usepackage{amsthm}
+
+\newtheoremstyle{mydefstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1} \normalfont{(#3)}}}}
+    
+\theoremstyle{mydefstyle}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+\newtheoremstyle{mythmstyle}
+    {6pt}
+    {3pt}
+    {}
+    {}
+    {\bfseries}
+    {}
+    { }
+    {\thmname{#1} \thmnumber{#2} \normalfont{\thmnote{(#3)}\addcontentsline{toc}{subsubsection}{\bf{#1 #2} \normalfont{(#3)}}}}
+    
+\theoremstyle{mythmstyle} 
+\newcounter{prop}
+\newtheorem{proposition}[prop]{Proposition}
+\newtheorem{theorem}[prop]{Theorem}
+\newtheorem{corollary}[prop]{Corollary}
+\newtheorem{lemma}[prop]{Lemma}
+
+\usepackage{tikz-cd}
+\usepackage{bm}
+\usepackage[shortlabels]{enumitem}
+
+
+
+
+
+
+
+
+
+
+
+
+\title{ALTAM and QFIQF}
+\date{}
+
+\begin{document}
+%\maketitle
+\pagecolor{white}
+%\tableofcontents
+
+\begin{center}
+\textbf{Chapter 8 Multiple state models}
+\end{center}
+
+Figure 8.1 The alive-dead model
+\begin{gather*}
+\mbox{\textbf{0} Alive} \to \mbox{\textbf{1} Dead}
+\end{gather*}
+
+Figure 8.2 The accidental death model
+\begin{gather*}
+\mbox{\textbf{1} Dead by accident} \leftarrow \mbox{\textbf{0} Alive} \to \mbox{\textbf{2} Dead by other causes}
+\end{gather*}
+
+Figure 8.3 The permanent disability model
+
+Figure 8.4 The sickness-death model
+
+For states $i$ and $j$ in a multiple state model and for $x, t \ge 0$, we define
+\begin{gather*}
+\hspace{0mm}_tp_x^{ij} = \mathbb{P}(Y(x+t) = j \vert Y(x) = i), \qquad
+\hspace{0mm}_tp_x^{\overline{ii}} = \mathbb{P}(Y(x+s) = i \mbox{ for all } 0 \le t \le s \vert Y(x) = i)
+\end{gather*}
+
+We define the transition intensity from state $i$ to state $j$ at age $x$ to be
+\begin{gather*}
+\mu_x^{ij} = \lim_{h \to 0} \frac{\hspace{0mm}_hp_x^{ij}}{h} \quad\mbox{ for }\quad i \ne j
+\end{gather*}
+hence for small positive values of $h$,
+\begin{gather*}
+\hspace{0mm}_hp_x^{ij} \approx h \mu_x^{ij} \quad\mbox{ for }\quad i \ne j
+\end{gather*}
+
+For a general multiple state model and small $h > 0$,
+\begin{gather*}
+\hspace{0mm}_hp_x^{\overline{ii}} = 1 - h \sum_{j \ne i} \mu_x^{ij} + o(h)
+\end{gather*}
+
+\newpage
+
+\textbf{27th January 2025, Monday, 6.12 am - in my room trying to get started with James work}
+
+Let $Q$ be a compact smooth manifold, and $T^*Q$ its cotangent bundle. This has the natural structure of a symplectic manifold where for every choice of local coordinates $(q_1, \dots, q_n)$ on $Q$ and corresponding local coordinates $(q_1, \dots, q_n, p_1, \dots, p_n)$ on $T^*Q$, the symplectic form in that neighbourhood is of the form
+\begin{gather*}
+\omega = dq_1 \wedge dp_1 + dq_2 \wedge dq_2 + \dots + dp_n \wedge dq_n
+\end{gather*}
+This symplectic form is in fact exact and is the differential of a global 1-form which in every local coordinate system is
+\begin{gather*}
+\lambda = p_1 dq_1 + p_2 dq_2 + \dots + p_n dq_n, \qquad \omega = -d\lambda
+\end{gather*}
+Furthermore, there is a partially defined group structure (i.e. a groupoid structure) on $T^*Q$ that is the addition of cotangent vectors on each cotangent fibre:
+\begin{gather*}
+T_{q_1}^*Q \times T_{q_2}^*Q \to T_{q_3}^*Q, \qquad (x, y) \mapsto x + y \quad\mbox{ if }\quad q_1 = q_2 = q_3
+\end{gather*}
+This can be viewed as a subset of the product of 3 copies of $T^*Q$:
+\begin{gather*}
+L = 
+\{
+(q^{(1)}, q^{(2)}, q^{(3)}, p^{(1)}, p^{(2)}, p^{(3)}) \in T^*Q \times T^*Q \times T^*Q \mbox{ s.t. } q^{(1)} = q^{(2)} = q^{(3)} \mbox{ and } p^{(1)} + p^{(2)} = p^{(3)}
+\}
+\end{gather*}
+This is a 3n-dimensional smooth submanifold of the 6n-dimensional $T^*Q \times T^*Q \times T^*Q$ and is indeed a Lagrangian submanifold of the product symplectic manifold. 
+
+Cotangent bundles of smooth manifolds naturally arise in mechanics as the ``phase space" of a constrained Hamiltonian dynamical system such as a set of rotating tops and/or rigid pendulums each fixed at a point and/or multiple jointed pendulums. The generalised position coordinate takes values $q \in Q$ while the generalised velocity, or more accurately momentum, of the system while it is at position $q$ is a cotangent vector $p \in T_q^*Q$. With this in mind, it is easy to imagine that the base manifold $Q$ naturally arises as spheres, products of spheres or $SO(3)$, and so these should be the first concrete examples we try to work with, starting with the simplest example of $Q = S^1$ which might describe a particle constrained to move at the free end of a rigid pendulum where the other end is fixed at a point. This is particularly simple and amenable to drawings since $T*Q = T*S^1 = S^1 \times \mathbb{R}$ is a 2-dimensional product manifold, indeed literally a cylinder. In the absence of external forces, neglecting even gravity, the Hamiltonian in mechanics is purely the kinetic energy
+\begin{gather*}
+H = p_1^2 + p_2^2 + \dots + p_n^2 \quad\mbox{ (this doesn't seem invariant)}
+\end{gather*}
+which is in particular, quadratic at infinity. 
+
+Consider next the 1-dimensional harmonic oscillator under the linear Hooke law, which has Hamiltonian
+\begin{gather*}
+H = p^2 + q^2
+\end{gather*}
+This can take any non-negative value which is fixed by the initial position and velocity. The phase space in this case is naturally decomposed into a product $[0, \infty) \times S^1$ where $h_0 \in [0, \infty)$ is the (conserved) total energy of the oscillator, and $\theta \in S^1$ gives its instantaneous state of motion. More generally, the Arnold-Liouville theorem tells us that if $(M^{2n}, \omega, H)$ is an integrable dynamical system, in the sense that we can find $n-1$ more independent conserved momenta, then $(M^{2n}, \omega)$ is symplectomorphic to a bundle of $n$-dimensional tori over a base manifold with an affine structure, i.e. a Lagrangian torus fibration. 
+
+A symplectic groupoid is a manifold $\Gamma$ with a partially defined multiplication and a compatible symplectic structure. 
+
+Symplectic cohomology is an invariant of a certain kind of symplectic manifolds (open or with boundary). 
+
+A Liouville domain is a compact manifold with boundary $M^{2n}$ with a one-form $\theta$ which has the following two properties. First, $\omega = d\theta$ should be symplectic. Secondly, the vector field $Z$ defined by $i_Z\omega = \theta$ should point strictly outwards along $\partial M$. 
+
+\textbf{References}
+
+Seidel - A Biased View of Symplectic Cohomology
+
+Weinstein - Symplectic Groupoids and Poisson Manifolds
+
+Floer \& Hofer - Symplectic Homology I - Open Sets in $\mathbb{C}^n$
+
+\newpage
+
+\textbf{28th January 2025, Tuesday, 4.01pm - in my room}
+
+There are 4 main ingredients involved in the problem:
+
+1. Symplectic cohomology
+2. Wrapped Fukaya category
+3. Functors from Lagrangian correspondences
+4. Homology of loops spaces
+
+Symplectic cohomology and (wrapped) Fukaya category are developed from Floer's original papers on Floer homology, the Hamiltonian and Lagrangian variants respectively. The origins of functors from Lagrangian correspondences and the homology of loop spaces within topology are unclear. The isomorphism between symplectic cohomology and the homology of loop spaces originates in Viterbo's work. 
+
+Symplectic cohomology and wrapped Fukaya category are defined for non-compact symplectic manifolds, or symplectic manifolds with non-empty boundary. There are requirements on how the non-compact symplectic manifold should behave ``at infinity" or how the symplectic manifold with non-empty boundary should behave in a neighbourhood of the boundary. These involve ideas of contact manifolds and closed characteristics in contact manifolds. Indeed the symplectic manifold itself might even be viewed as having been constructed from the contact manifold as an object of more concrete interest. I think contact manifolds arise as level sets of energy (Hamiltonian) in classical mechanics. There is the Weinstein conjecture on the existence of closed characteristics in contact manifolds that should be compared with Arnold's conjecture on the existence of periodic orbits in symplectic manifolds.
+
+There are product structures on the homology of loop spaces that make it into a ring or a BV algebra (cf last week's discussion with James on product structures arising or not arising from a group structure on the manifold). The ``string product" in particular has shown up several times and so far appears to be a purely topological construction. 
+
+The first, only, and most important example right now is $T^*S^1$. Need to get down the entire story of how things work in this situation. 
+
+What is the symplectic cohomology of $T^*S^1$? Strangely, my vague recollection is that we were drawing diagrams of the Lagrangian submanifolds - Abouzaid says ``a cotangent fibre generates the Fukaya category". His student Sheel Ganatra's paper gives an isomorphism between symplectic cohomology and wrapped Fukaya category. The answer that James has repeatedly given me looks like some sort of polynomial ring so need to understand the addition and multiplication rule. That answer was obtained indirectly by ``knowing" the singular homology of the loop space. Is that always the way to proceed? 
+
+What is the functor induced by the groupoid multiplication on the symplectic cohomology? We drew some diagrams again, splitting the 6-dimensional triple product into a triple product of the base and a triple product of the fibre, so a 3-torus and literal 3-dimensional real vector space. The answers involved many diagonal-esque terms. 
+
+There is supposed to be yet a third algebraic aspect of this - the Hochschild cohomology of either the singular chain complex of the loop space $\Omega Q$ of $Q$, as in topology, or the Hochschild cohomology of the Fukaya category of the cotangent bundle $T^*Q$ of $Q$. We have not touched on this at all in our $T^*S^1$ example and it is unclear what role this algebraic aspect should play.
+
+\textbf{Theorem 1.2 (Yuan Gao)} Let $\mathcal{L} \subset M^- \times N$ be an admissible Lagrangian correspondence between Liouville manifolds $M$ and $N$, such that the projection $\mathcal{L} \to N$ is proper. Then under some further generic geometric conditions, namely Assumption 7.10, we have
+\begin{enumerate}[label = (\roman*)]
+\item For every object $L \in Ob\mathcal{W}(M)$, there is a curved $A_{\infty}$-algebra associated to the geometric composition $L \circ \mathcal{L}$ defined in terms of wrapped Floer theory for Lagrangian immersions
+\item The geometric composition $L \circ \mathcal{L}$ is always unobstructed, with a canonical choice of bounding cochain $b$ for it. Thus $(L \circ \mathcal{L}, b)$ becomes an object of $\mathcal{W}_{im}(N)$. This $b$ is unique such that the next condition is satisfied.
+\item There is a natural $A_{\infty}$-functor
+\begin{gather*}
+\Theta_{\mathcal{L}} : \mathcal{W}(M) \to \mathcal{W}_{im}(N)
+\end{gather*}
+which represents $\Phi_{\mathcal{L}}$. On the level of objects, it sends any Lagrangian submanifold $L \in Ob\mathcal{W}(M)$ to the pair $(L \circ \mathcal{L}, b) \in Ob\mathcal{W}_{im}(N)$. 
+\end{enumerate}
+
+\textbf{Theorem 1.1 (Abouzaid)} If $Q$ is an oriented closed smooth manifold, then any cotangent fibre generates the wrapped Fukaya category of $T^*Q$ with background class $b \in H^*(T^*Q, \mathbb{Z}_2)$ given by the pullback of the second Stiefel-Whitney class of $Q$. Moreover, the triangulated closure of this Fukaya category is quasi-isomorphic to the category of twisted complexes over $C_{-*}(\Omega_qQ)$. 
+
+\textbf{Theorem 1.1 (Sheel Ganatra)} If $M$ is non-degenerate, then the natural geometric maps
+\begin{gather*}
+HH_{*-n}(\mathcal{W}) \xrightarrow{[\mathcal{OC}]} SH^*(M) \xrightarrow{[\mathcal{CO}]} HH^*(\mathcal{W})
+\end{gather*}
+are both isomorphisms, compatible with Hochschild ring and module structures.
+
+\textbf{Theorem 1.1 (Abouzaid)} If $Q$ is a closed smooth manifold, there exists an $A_{\infty}$ equivalence
+\begin{gather*}
+CW_b^*(T_q^*Q) \to C_{-*}(\Omega_q Q)
+\end{gather*}
+between the homology of the space of loops on $Q$ based at $q$ and the Floer cohomology of the cotangent fibre at $q$ taken as an object of the wrapped Fukaya category of $T^*Q$ with background class $b \in H^*(T^*Q, \mathbb{Z}_2)$ given by the pullback of $w_2(Q) \in H^*(Q, \mathbb{Z}_2)$. 
+
+\textbf{Theorem 4.1.1 (Abouzaid)} There is a map of BV algebras from the symplectic cohomology of $T^*Q$ to the homology of the free loop space of $Q$ twisted by $\eta$, with reversed grading, i.e. we have a map
+\begin{gather*}
+\mathcal{V} : SH^*(T^*Q; \mathbb{Z}) \to H_{-*}(\mathcal{L}Q; \eta)
+\end{gather*}
+preserving the operations $e$, $\star$ and $\Delta$. 
+
+\textbf{Theorem 5.1.1 (Abouzaid)} There is a map
+\begin{gather*}
+\mathcal{F} : H_*(\mathcal{L}Q; \eta) \to SH^*(T^*Q; \mathbb{Z})
+\end{gather*}
+such that the composition
+\begin{gather*}
+H_*(\mathcal{L}Q; \eta) \xrightarrow{\mathcal{F}} SH^{-*}(T^*Q; \mathbb{Z}) \xrightarrow{\mathcal{V}} H_*(\mathcal{L}Q; \eta)
+\end{gather*}
+is an isomorphism.
+
+\textbf{Theorem 6.1.1 (Abouzaid)} $\mathcal{F}$ is surjective hence $\mathcal{F}$ and $\mathcal{V}$ are (mutually inverse) isomorphisms.
+
+\newpage
+
+\textbf{30th January 2025, Thursday, 6.08pm - in my room}
+
+For the millionth time...
+
+If $M$ is a Liouville manifold that is also a symplectic groupoid, i.e there is a partial multiplication sending certain pairs of elements in $M$ to an element in $M$, then this groupoid multiplication should induce a product on the symplectic cohomology $SH^*(M)$ of $M$. Since the symplectic cohomology of $M$ is supposed to be isomorphic to the homology of the free loop space of $M$, we then obtain a coproduct on the free loop space of $M$. This coproduct should be the same as that induced by the diagonal inclusion map of the free loop space. Finally, we should investigate the interaction between this coproduct on symplectic cohomology with the known BV algebra structure. 
+
+Currently, we have
+
+1. Yuan Gao's theorem on how to obtain a product on the wrapped Fukaya category of a Liouville manifold from a Lagrangian correspondence
+
+2. Sheel Ganatra's theorem on the isomorphism between the Hochschild cohomology of the wrapped Fukaya category of a Liouville manifold and its symplectic cohomology
+
+So the most obvious path would be to transform the symplectic cohomology of a symplectic groupoid Liouville manifold into the wrapped Fukaya category, compute the product there, and then transform the output from the wrapped Fukaya category back into symplectic cohomology again. More precisely, the symplectic cohomology of $M$ should be a sort of finitely-generated algebra over $\mathbb{Z}$ and so we should define the product in terms of the generators of this algebra. These in turn should correspond to ``generators" of the wrapped Fukaya category but it is currently unclear exactly what it means for the wrapped Fukaya category of a Liouville manifold to be generated by a finite collection of Lagrangian submanifolds so that is one thing to sort out. 
+
+In terms of concrete examples, we have $T^*Q$ of a closed orientable smooth manifold $Q$ and also Lagrangian torus fibrations over an affine base. Putting aside the second class of examples for now, the symplectic cohomology of $T^*Q$ should probably be computed using Viterbo's theorem, which tells us that the symplectic cohomology of $T^*Q$ is isomorphic to the homology of the free loop space of $Q$. Thus another thing to do is to learn how to compute the homology of the free loop space of a closed orientable smooth manifold. 
+
+Sheel Ganatra's theorem is potentially problematic for our purpose since it is not an isomorphism from the symplectic cohomology to the wrapped Fukaya category itself, but rather the Hochschild cohomology of the Fukaya category. It is unclear what the Hochschild cohomology of the Fukaya category is, and just how far this fits our purposes so that is yet another thing to figure out. 
+
+\textbf{Background on Floer's original theories of Lagrangian Floer homology and symplectic cohomology}
+
+Main point of Lagrangian Floer homology is that the homology is independent of Hamiltonian ``perturbations".
+
+Floer's symplectic cohomology seems to be of the Hamiltonian version. Did he also have a Lagrangian version which would be closer to the wrapped Fukaya category?
+
+\textbf{General background and definitions of symplectic groupoids and Liouville manifolds}
+
+\textbf{Yuan Gao's Theorem}
+
+\textbf{Theorem 1.2} Let $\mathcal{L} \subset M^- \times N$ be an admissible Lagrangian correspondence between Liouville manifolds $M$ and $N$, such that the projection $\mathcal{L} \to N$ is proper. Then under some further generic geometric conditions, namely Assumption 7.10, we have
+\begin{enumerate}[label = (\roman*)]
+\item For every object $L \in Ob\mathcal{W}(M)$, there is a curved $A_{\infty}$-algebra associated to the geometric composition $L \circ \mathcal{L}$, defined in terms of wrapped Floer theory for Lagrangian immersions
+\item The geometric composition $L \circ \mathcal{L}$ is always unobstructed, with a canonical choice of bounding cochain $b$ for it. Thus $(L \circ \mathcal{L}, b)$ becomes an object of $\mathcal{W}_{im}(N)$. This $b$ is unique such that the next condition is satisfied.
+\item There is a natural $A_{\infty}$-functor
+\begin{gather*}
+\Theta_{\mathcal{L}} : \mathcal{W}(M) \to \mathcal{W}_{im}(N) \tag{1.5}
+\end{gather*}
+which represents $\Phi_{\mathcal{L}}$. On the level of objects, it sends any Lagrangian submanifold $L \in Ob\mathcal{W}(M)$ to the pair $(L \circ \mathcal{L}, b) \in Ob\mathcal{W}_{im}(N)$. 
+\end{enumerate}
+
+\textbf{Definition 2.12} A bounding cochain for the curved $A_{\infty}$-algebra $(C, m^k)$ is an element $b$, such that the inhomogeneous Maurer-Cartan equation is satisfied
+\begin{gather*}
+\sum_{k = 0}^{\infty} m^k(b, \dots, b) = 0 \tag{2.34}
+\end{gather*}
+where the sum only has finitely many nonzero terms, i.e. $b$ is assumed to be nilpotent. 
+
+\textbf{3.2 Basic geometric setup} Consider a Liouville manifold $M$ which is the completion of a Liouville domain $M_0$ with boundary $\partial M$, which has a collar neighbourhood $\partial M \times (\epsilon, 1]$ so that the Liouville vector field is equal to $\frac{\partial}{\partial r}$ in that neighbourhood. We assume that $M$ is symplectically Calabi-Yau, namely $2c_1(M) = 0 \in H^2(M; \mathbb{Z})$.
+
+The admissible Lagrangian submanifolds are either closed exact Lagrangian submanifolds in the interior $M_0$, or cylindrical Lagrangian submanifolds of the form $L = L_0 \cup \partial L \times [1, +\infty)$ where $\partial L \subset \partial M$ is a Legendrian submanifold with respect to the contact structure induced from the Liouville one-form. To be more specific, for the latter kind of Lagrangian submanifold $L_0$ of $M_0$, there should be a function $f$ on it so that $df = \lambda \vert_{L_0}$, where $\lambda$ is the Liouville form. Moreover, we require that...
+
+\textbf{3.4 Inhomogeneous pseudoholomorphic discs} To define the $A_{\infty}$-operations on the wrapped Fukaya category, we need to study the moduli spaces of inhomogeneous pseudoholomorhic discs with boundary mapped to several Lagrangian submanifolds... $S$ is a smooth disc with boundary marked points $(z_0, \dots, z_k)$ that are cyclically ordered on the boundary. Given admissible Lagrangian submanifolds $L_0, \dots, L_k$, consider the following inhomogeneous Cauchy-Riemann equation, for both $S$ and $u$ as variables...
+
+\textbf{3.6 Winding Lagrangian submanifolds} Let us introduce a new class of Lagrangian submanifolds in the wrapped Fukaya category. These Lagrangian submanifolds come from geometric compositions of Lagrangian correspondences to be discussed in detail in section 7.4. This class includes in particular $H$-perturbed cylindrical Lagrangian submanifolds in $M$, i.e. $\phi^1_H(L)$ for some cylindrical Lagrangian submanifold $L = L_0 \cup \partial L \times [1, +\infty)$, where the Hamiltonian perturbation is the same as the one used to define $\mathcal{W}(M)$ - these $H$-perturbed cylindrical Lagrangian submanifolds are geometric compositions with the diagonal. The picture of such a Lagrangian submanifold is one that winds around in the cylindrical end of $M$. 
+
+\textbf{4.1 Overview of immersed Lagrangian Floer theory} In this section, we extend wrapped Floer theory to certain classes of Lagrangian immersions. The main purpose of such an extension is to prove representability of functors associated to Lagrangian correspondences in general, though in many concrete and interesting cases, it is sufficient to study embedded Lagrangian submanifolds. 
+
+\textbf{Sheel Ganatra's Theorem}
+
+\textbf{Viterbo's Theorem (Abouzaid)}
+
+\textbf{Abouzaid's Theorem} (A Cotangent Fibre Generates the Fukaya Category)
+
+\textbf{Theorem 1.1} If $Q$ is an oriented closed smooth manifold, then any cotangent fibre generates the wrapped Fukaya category of $T^*Q$ with background class $b \in H^*(T^*Q, \mathbb{Z}_2)$ given by the pullback of the second Stiefel-Whitney class of $Q$. Moreover, the triangulated closure of this Fukaya category is quasi-isomorphic to the category of twisted complexes over $C_{-*}(\Omega_q Q)$. 
+
+The fact that the wrapped Fukaya category is generated rather than split-generated does not follow from the machinery of [3]. Rather, it is a consequence of the existence of an $A_{\infty}$-homorphism $\mathcal{F}$ from the wrapped Floer cochain complex of a cotangent fibre to the Pontryagin differential graded algebra $C_{-*}(\Omega_q Q)$ of chains on the based loop space, which was constructed in [2]. On homology this homomorphism induces a map
+\begin{gather*}
+H^*(\mathcal{F}) : HW_b^*(T_q^*Q) \to H_{-*}(\Omega_q Q) \tag{1.1}
+\end{gather*}
+
+\textbf{Proof} If $H^*(\mathcal{F})$ is an isomorphism, then so is the map induced by $\mathcal{F}$ on Hochschild homology... By Theorem 1.1 in [3], we conclude that $T_q^*Q$ split-generates the wrapped Fukaya category of the cotangent bundle.
+
+To pass from split-generation to generation, we note that Corollary 1.2 in [2] extends the $A_{\infty}$-homomorphism $\mathcal{F}$ to a functor from the wrapped Fukaya category of $T^*Q$ to the category of twisted complexes over $C_{-*}(\Omega_qQ)$... Since $T_q*Q$ split-generates the wrapped Fukaya category, this is a cohomologically fully faithful embedding, and hence every object of the wrapped Fukaya category of $T^*Q$ is in fact isomorphic to an iterated cone of cotangent fibres. 
+
+[2] On the wrapped Fukaya category and based loops (Abouzaid)
+
+[3] A geometric criterion for generating the Fukaya category (Abouzaid)
+
+\textbf{Computing the homology of the loop space of a closed orientable smooth manifold}
+
+Last week James reminded me that the homology of the loop space of $S^1$ is
+\begin{gather*}
+\mathbb{Z}[t, t^{-1}] \otimes \mathbb{Z}[s]/(s^2)
+\end{gather*}
+though I am not entirely confident that I understood him correctly. In any case, I would like a way of working this and similar results (i.e. compute the homology of the loop space of an arbitrary closed orientable manifold) for myself, rather than imprecisely remembering or completely failing to remember the answer that James told me.
+
+The first factor $\mathbb{Z}[t, t^{-1}]$ that is the Laurent polynomials in a single variable with coefficients in $\mathbb{Z}$ seems reasonable enough and plausibly corresponds to the $\mathbb{Z}$-many intersection points between a particular cotangent fibre in $T^*S^1$ with that same fibre perturbed by a Hamiltonian suitable for symplectic cohomology - quadratic at infinity, indeed in this simple case we choose the kinetic energy $H = p^2$ which is quadratic everywhere. Observe that this choice is possible and well-defined since the cotangent bundle is trivial, which may not be the case for general $T^*Q$. 
+
+The second factor is completely incomprehensible to me at the moment. 
+
+I vaguely recall reading somewhere about using a spectral sequence on the loop-loop fibration
+\begin{gather*}
+\mbox{based loop space of $Q$} \longrightarrow \mbox{free loop space of $Q$} \longrightarrow Q
+\end{gather*}
+where the second map sends an element in the free loop space to its starting (and ending) point, which is just a point in $Q$. Perhaps this is the way to compute the answer in general. 
+
+\newpage
+
+\textbf{1st February 2025, Saturday, 6.17am - in my room}
+
+\emph{Evaluating feasibility of ASTAM before 3rd February registration day...}
+
+\textbf{Klugman et al - Loss Models: From Data to Decisions 5ed}
+
+\begin{enumerate}[label=]
+
+\item Chapter 3 Basic Distributional Quantities
+\begin{enumerate}[label=]
+\item 3.3 Generating Functions and Sums of Random Variables
+\item 3.4.2 Comparison Based on Limiting Tail Behaviour
+\item 3.4.3 Classification Based on the Hazard Rate Function
+\item 3.4.4 Classification Based on the Mean Excess Loss Function
+\item 3.4.5 Equilibrium Distributions and Tail Behaviour
+\item 3.4.6 Exercises
+\end{enumerate}
+
+\item Chapter 5 Continuous Models
+\begin{enumerate}[label=]
+\item 5.1 Introduction
+\item 5.2 Creating New Distributions
+\end{enumerate}
+
+\item Chapter 7 Advanced Discrete Distributions
+\begin{enumerate}[label=]
+\item 7.1
+\item 7.2
+\end{enumerate}
+
+\item Chapter 8 Frequency and Severity with Coverage Modifications
+\begin{enumerate}[label=]
+\item 
+\item 
+\end{enumerate}
+
+\item Chapter 9 Aggregate Loss Models
+\begin{enumerate}[label=]
+\item 9.3.1
+\item 9.3.2
+\item 9.4 (Theorem 9.7 \& Example 9.9 only)
+\item 9.5
+\item 9.6 (except 9.6.1)
+\item 9.7
+\end{enumerate}
+
+\item Chapter 11 Maximum Likelihood Estimation
+\begin{enumerate}[label=]
+\item 11.5
+\item 11.6
+\item 11.7
+\end{enumerate}
+
+\item Chapter 12 Frequentist Estimation for Discrete Distributions
+\begin{enumerate}[label=]
+\item 12.4
+\end{enumerate}
+
+\item Chapter 13 Bayesian Estimation
+\begin{enumerate}[label=]
+\item 
+\item 
+\end{enumerate}
+
+\item Chapter 15 Model Selection (except Section 15.4.2)
+\begin{enumerate}[label=]
+\item 
+\item 
+\end{enumerate}
+
+\item Chapter 17 Greatest Accuracy Credibility
+\begin{enumerate}[label=]
+\item 
+\item 
+\end{enumerate}
+
+\item Chapter 18 Empirical Bayes Parameter Estimation
+\begin{enumerate}[label=]
+\item 
+\item 
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+
+Chapter 3 Basic Distributional Quantities: Sections 3.3, 3.4.2-3.4.6
+
+\textbf{3.3 Generating Functions and Sums of Random Variables}
+
+Gamma distribution
+
+Pareto distribution
+
+If $X_1, X_2, \dots$ is a sequence of iid random variables with finite mean $\mu$ and finite variance $\sigma^2$, then
+\begin{gather*}
+\frac{X_1 + X_2 + \dots + X_n - n\mu}{\sqrt{n\sigma^2}} \to N(0, 1) \mbox{ in distribution}
+\end{gather*}
+
+The moment generating function of a random variable $X$ is 
+\begin{gather*}
+M_X(z) = \mathbb{E}(e^{zX})
+\end{gather*}
+for all $z$ for which the expected value exists. The probability generating function is
+\begin{gather*}
+P_X(z) = \mathbb{E}(z^X)
+\end{gather*}
+for all $z$ for which the expectation exists. Often, the mgf is used for continuous random variables and the pgf for discrete random variables. 
+
+The sum of independent gamma random variables, each with the same value of $\theta$, has a gamma distribution. 
+
+The probability generating function of a Poisson random variable is
+\begin{gather*}
+P_X(z) = \mathbb{E}(z^X)
+= \sum_{n = 0}^{\infty} z^n \frac{e^{-\lambda} \lambda^n}{n!}
+= \sum_{n = 0}^{\infty} \frac{(\lambda z)^n}{n!} e^{-\lambda z} e^{\lambda(z-1)}
+= e^{\lambda(z-1)}
+\end{gather*}
+so the moment generating function is
+\begin{gather*}
+M_X(z) = \mathbb{E}(e^{zX}) = \mathbb{E}((e^z)^X) = P_X(e^z) = \exp\left(\lambda(e^z - 1)\right)
+\end{gather*}
+
+\textbf{3.4.2 Comparison Based on Limiting Tail Behaviour}
+
+A commonly used indication that one distribution has a heavier tail than another distribution with the same mean is that the ratio of the two survival functions should diverge to infinity (with the heavier-tailed distribution in the numerator) as the argument becomes large. By L'Hopital's rule, it is equivalent to examine the ratio of the density functions:
+\begin{gather*}
+\lim_{x \to \infty} \frac{S_1(x)}{S_2(x)} = \lim_{x \to \infty} \frac{f_1(x)}{f_2(x)}
+\end{gather*}
+
+The Pareto distribution has a heavier tail than the gamma distribution, since
+\begin{gather*}
+\lim_{x \to \infty} \frac{f_{Pareto}(x)}{f_{gamma}(x)}
+= \lim_{x \to \infty} \frac{\alpha \theta^{\alpha} (x+\theta)^{-\alpha-1}}{x^{\tau-1} e^{-x/\lambda} \lambda^{-\tau} \Gamma(\tau)^{-1}}
+= c \lim_{x \to \infty} \frac{e^{x/\lambda}}{(x+\theta)^{\alpha + 1} x^{\tau - 1}}
+> c \lim_{x \to \infty} \frac{e^{x/\lambda}}{(x+\theta)^{\alpha + \tau}} = \infty
+\end{gather*}
+since the exponential of $x$ goes to infinity faster than any power of $x$.
+
+\textbf{3.4.3 Classification Based on the Hazard Rate Function}
+
+Distributions with decreasing hazard rate functions have heavy tails. Distributions with increasing hazard rate functions have light tails. 
+
+The hazard rate function for the Pareto distribution is
+\begin{gather*}
+h(x) = \frac{f(x)}{S(x)} = \frac{\alpha \theta^{\alpha} (x+\theta)^{-\alpha-1}}{\theta^{\alpha} (x+\theta)^{-\alpha}} = \frac{\alpha}{x+\theta}
+\end{gather*}
+which is decreasing. For the gamma distribution we need to be a bit more clever because there is no closed-form expression for $S(x)$. Observe that
+\begin{gather*}
+\frac{1}{h(x)} = \frac{\int_x^{\infty} f(t) dt}{f(x)} = \frac{\int_0^{\infty} f(x+y) dy}{f(x)}
+\end{gather*}
+so if $f(x+y) / f(x)$ is an increasing function of $x$ for any fixed $y$, then $1/h(x)$ wiil be increasing in $x$ and thus the random variable will have a decreasing hazard rate. For the gamma distribution, 
+\begin{gather*}
+\frac{f(x+y)}{f(x)} = \frac{(x+y)^{\alpha-1} e^{-(x+y)/\theta}}{x^{\alpha-1} e^{-x/\theta}} = \left(1+\frac{y}{x}\right)^{\alpha-1} e^{-y/\theta}
+\end{gather*}
+which is strictly increasing in $x$ if $\alpha < 1$ and strictly decreasing in $x$ if $\alpha > 1$. By this measure, some gamma distributions have a heavy tail (those with $\alpha < 1$) and some have a light tail (those with $\alpha > 1$). 
+
+\textbf{3.4.4 Classification Based on the Mean Excess Loss Function}
+
+If the mean excess loss function is increasing in $d$, the distribution is considered to have a heavy tail. If the mean excess loss function is decreasing in $d$, the distribution is considered to have a light tail. 
+
+From (3.5) the mean excess loss function may be expressed as
+\begin{gather*}
+e(d) = \frac{\int_d^{\infty} S(x) dx}{S(d)} = \int_0^{\infty} \frac{S(y+d)}{S(d)} dy
+\end{gather*}
+Thus if the hazard rate is a decreasing function, then the mean excess loss function $e(d)$ is an increasing function of $d$ because the same is true of $S(y+d)/S(d)$ for fixed $y$. Similarly, if the hazard rate is an increasing function, then the mean excess loss function is a decreasing function. However the converse implication is not true. Exercise 3.29 gives an example of a distribution that has a decreasing mean excess loss function, but the hazard rate is not increasing for all values. 
+
+The mean excess loss function of the gamma distribution is complicated, and
+\begin{gather*}
+\lim_{x \to \infty} e(x) = \lim_{x \to \infty} \frac{1}{h(x)} = \theta
+\end{gather*}
+
+\textbf{3.4.5 Equilibrium Distributions and Tail Behaviour}
+
+Further insight into the mean excess loss function and the heaviness of the tail may be obtained by introducing the equilibrium distribution (also called the integrated tail distribution). For positive random variables with $S(0) = 1$, have
+\begin{gather*}
+E(X) = \int_0^{\infty} S(x) dx \quad\Rightarrow\quad 1 = \int_0^{\infty} \frac{S(x)}{E(X)} dx
+\end{gather*}
+so 
+\begin{gather*}
+f_e(x) = \frac{S(x)}{E(X)}, \qquad x \ge 0
+\end{gather*}
+is a probability density function. The corresponding survival function is
+\begin{gather*}
+S_e(x) = \int_x^{\infty} f_e(t) dt = \frac{\int_x^{\infty} S_t() dt}{E(X)}, \qquad x \ge 0
+\end{gather*}
+The hazard rate corresponding to the equilibrium distribution is
+\begin{gather*}
+h_e(x) = \frac{f_e(x)}{S_e(x)} = \frac{S(x)}{\int_x^{\infty} S(t) dt} = \frac{1}{e(x)}
+\end{gather*}
+
+\textbf{3.4.6 Exercises}
+
+Compare the tail weight of the Weibull and inverse Weibull distributions.
+
+\newpage
+
+Chapter 5 Continuous Models: Sections 5.1, 5.2
+
+\textbf{5.1 Introduction}
+
+In this chapter, a variety of continuous models are introduced. The collection developed here should be sufficient for most modelling situations. The discussion begins by showing how new distributions can be created from existing ones.
+
+\textbf{5.2 Creating New Distributions}
+
+In actuarial applications, we are mainly interested in distributions that have only positive support, that is, where $F(0) = 0$. 
+
+\textbf{5.2.1 Multiplication by a Constant}
+
+This transformation is equivalent to applying inflation uniformly across all loss levels and is known as a change of scale. If $X$ is a continuous random variable and $Y = \theta X$ for some constant $\theta > 0$, then
+\begin{gather*}
+F_Y(y) = F_X\left(\frac{y}{\theta}\right), \qquad f_Y(y) = \frac{1}{\theta} f_X\left(\frac{y}{\theta}\right)
+\end{gather*}
+The parameter $\theta$ is a scale parameter for the random variable $Y$. 
+
+\textbf{5.2.2 Raising to a Power}
+
+If $X$ is a non-negative continuous random variable and $Y = X^{1/\tau}$ for some constant $\tau > 0$, then
+\begin{gather*}
+F_Y(y) = F_X\left(y^{\tau}\right), \qquad f_Y(y) = \tau y^{\tau-1}f_X(y^{\tau}), \qquad y > 0
+\end{gather*}
+
+When raising a distribution to a power, if $\tau > 0$, the resulting distribution is called transformed. If $\tau = -1$, it is called inverse. If $\tau < 0$ but $\tau \ne -1$, it is called inverse transformed. 
+
+The Weibull distribution is the transformed exponential distribution with scale parameter added:
+\begin{gather*}
+F(y) = 1 - \exp[-(y/\theta)^{\tau}], \qquad y \ge 0
+\end{gather*}
+The inverse Weibull distribution is the inverse transformed exponential distribution with scale parameter added:
+\begin{gather*}
+F(y) = \exp[-(\theta/y)^{\tau}], \qquad y \ge 0
+\end{gather*}
+
+The incomplete gamma function with parameter $\alpha > 0$ is 
+\begin{gather*}
+\Gamma(\alpha; x) = \frac{1}{\Gamma(\alpha)} \int_0^x t^{\alpha-1} e^{-t} dt
+\end{gather*}
+where the gamma function is
+\begin{gather*}
+\Gamma(\alpha) = \int_0^{\infty} t^{\alpha-1} e^{-t} dt
+\end{gather*}
+Note that
+\begin{gather*}
+\Gamma(\alpha) = (\alpha-1)\Gamma(\alpha-1)
+\end{gather*}
+for all real values of $\alpha > 1$, and 
+\begin{gather*}
+\Gamma(n) = (n-1)! \qquad \forall \hspace{1mm} n \in \mathbb{N}
+\end{gather*}
+
+\textbf{5.2.3 Exponentiation}
+
+If $X$ is a continuous random variable and $Y = e^X$, then
+\begin{gather*}
+F_Y(y) = F_X(\ln y), \qquad f_Y(y) = \frac{1}{y} f_X(\ln y), \qquad y > 0
+\end{gather*}
+
+\textbf{5.2.4 Mixing}
+
+The concept of mixing can be extended from mixing a finite number of random variables to mixing an uncountable number. 
+
+Let $X$ have pdf $f_{X\vert\Lambda}(x\vert\lambda)$ and cdf $F_{X\vert\Lambda}(x\vert\lambda)$ where $\lambda$ is a parameter of $X$ that is a realisation of the random variable $\Lambda$ with pdf $f_{\Lambda}(\lambda)$. Then the unconditional pdf of $X$ is
+\begin{gather*}
+f_X(x) = \int f_{X\vert\Lambda}(x\vert\lambda) f_{\Lambda}(\lambda) d\lambda \tag{5.2}
+\end{gather*}
+where the integral is taken over all values of $\lambda$. The resulting distribution is a mixture distribution. The distribution function is
+\begin{gather*}
+F_X(x) = \int F_{X\vert\Lambda}(x\vert\lambda) f_{\Lambda}(\lambda) d\lambda
+\end{gather*}
+Moments of the mixture distribution are given by
+\begin{gather*}
+E(X^k) = E[E(X^k \vert \Lambda)]
+\end{gather*}
+In particular,
+\begin{align*}
+\Var(X) 
+&= E(X^2) - E(X)^2 \\
+&= E(E(X^2\vert\Lambda)) - E(E(X\vert\Lambda))^2 \\
+&= E(E(X^2\vert\Lambda)) - E(E(X\vert\Lambda)^2) + E(E(X\vert\Lambda)^2) - E(E(X\vert\Lambda))^2 \\
+&= E(\Var(X\vert\Lambda)) + \Var(E(X\vert\Lambda))
+\end{align*}
+
+Mixture distributions tend to be heavy tailed, so this method is a good way to generate such a model. In particular, if $f_{X\vert\Lambda}(x\vert\lambda)$ has a decreasing hazard rate function for all $\lambda$, then the mixture distribution will also have a decreasing hazard rate function. 
+
+Let $X\vert\Lambda$ have an exponential distribution with parameter $1/\Lambda$. Let $\Lambda$ have a gamma distribution. Then the unconditional distribution of $X$ is a Pareto distribution.
+
+Suppose that given $\Theta = \theta$, $X$ is normally distributed with mean $\theta$ and variance $v$. If $\Theta$ is itself normally distributed with mean $\mu$ and variance $a$, then the unconditional distribution of $X$ is normal with mean $\mu$ and variance $a+v$.
+
+In the evaluation of warranties on automobiles, it is important to recognise that the number of miles driven varies from driver to driver...
+
+\textbf{5.2.5 Frailty Models}
+
+An important type of mixture distribution is a frailty model. We begin by introducing a frailty random variable $\Lambda > 0$ and define the conditional hazard rate given $\Lambda = \lambda$ to be
+\begin{gather*}
+h_{X\vert\Lambda}(x\vert\lambda) = \lambda a(x)
+\end{gather*}
+where $a(x)$ is a known function of $x$, i.e. $a(x)$ is to be specified in a particular application. The frailty is meant to quantify uncertainty associated with the hazard rate. 
+
+The conditional survival function of $X \vert \Lambda$ is then
+\begin{gather*}
+S_{X\vert\Lambda}(x\vert\lambda) = e^{-\int_0^x h_{X\vert\Lambda}}(t\vert\lambda) dt = e^{-\lambda A(x)}, \qquad A(x) = \int_0^x a(t) dt
+\end{gather*}
+
+The marginal survival function is
+\begin{gather*}
+S_X(x) = E[e^{-\Lambda A(x)}] = M_{\Lambda}[-A(x)] \tag{5.3}
+\end{gather*}
+
+The type of mixture to be used determines the choice of $a(x)$ and hence $A(x)$. The most important subclass of the frailty models is the class of exponential mixtures with
+\begin{gather*}
+a(x) = 1, \qquad A(x) = x, \qquad S_{X\vert\Lambda}(x\vert\lambda) = e^{-\lambda x}, \qquad x \ge 0
+\end{gather*}
+Other useful mixtures include Weibull mixtures with
+\begin{gather*}
+a(x) = \gamma x^{\gamma - 1}, \qquad A(x) = x^{\gamma}
+\end{gather*}
+
+Evaluation of the frailty distribution requires an expression for the moment generating function $M_{\Lambda}(z)$ of $\Lambda$. The most common choice is gamma frailty, but other choices such as inverse Gaussian frailty are also used.
+
+Let $\Lambda$ have a gamma distribution and let $X\vert\Lambda$ have a Weibull distribution with conditional survival function
+\begin{gather*}
+S_{X\vert\Lambda}(x\vert\lambda) = e^{-\lambda x^{\gamma}}
+\end{gather*}
+The unconditional or marginal distribution of $X$ is...
+
+\textbf{5.2.6 Splicing}
+
+\textbf{5.2.7 Exercises}
+
+\newpage
+
+Chapter 7 Advanced Discrete Distributions: Sections 7.1, 7.2
+
+Chapter 8 Frequency and Severity with Coverage Modifications
+
+Chapter 9 Aggregate Loss Models: Sections 9.3.1, 9.3.2, 9.4 (Theorem 9.7 \& Example 9.9 only), 9.5, 9.6 (except 9.6.1), 9.7
+
+Chapter 11 Maximum Likelihood Estimation: Sections 11.5-11.7
+
+Chapter 12 Frequentist Estimation for Discrete Distributions: Section 12.4
+
+Chapter 13 Bayesian Estimation
+
+Chapter 15 Model Selection (except Section 15.4.2)
+
+Chapter 17 Greatest Accuracy Credibility
+
+Chapter 18 Empirical Bayes Parameter Estimation
+
+\textbf{Brown \& Lennox - Introduction to Ratemaking and Loss Reserving 5ed}
+
+Chapter 1 (Sections 1.2, 1.4)
+
+Chapter 4 (Section 4.8)
+
+Chapter 5 (Sections 5.3, 5.4)
+
+\end{document}
